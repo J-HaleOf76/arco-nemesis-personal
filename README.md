@@ -1,4 +1,7 @@
 # ArcoLinux Nemesis
+## This is for my Arcolinux system.
+I need to change this to fit my arco needs.
+
 
 What to do after the installation of the latest version of ArcoLinux?
 
