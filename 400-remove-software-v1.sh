@@ -15,17 +15,28 @@
 #
 ##################################################################################################################
 
-if 	lsblk -f | grep btrfs > /dev/null 2>&1 ; then
-	echo "You are using BTRFS. Installing the software ..."
-	sudo pacman -S --needed --noconfirm timeshift
-	sudo pacman -S --needed --noconfirm grub-btrfs
-	sudo pacman -S --needed --noconfirm timeshift-autosnap
-	sudo systemctl enable grub-btrfs.path
-else
-	echo "Your harddisk/ssd/nvme is not formatted as BTRFS."
-	echo "Packages will not be installed"
-fi
+# Here we remove applications we do not want
+
+sudo systemctl disable tlp.service
+
+sudo pacman -Rs tlp --noconfirm
+
+sudo pacman -Rs broadcom-wl-dkms --noconfirm
+
+sudo pacman -Rs r8168-dkms --noconfirm
+
+sudo pacman -Rs xf86-video-amdgpu --noconfirm
+sudo pacman -Rs xf86-video-fbdev --noconfirm
+sudo pacman -Rs xf86-video-openchrome --noconfirm
+sudo pacman -Rs xf86-video-vmware --noconfirm
+sudo pacman -Rs xf86-video-ati --noconfirm
+sudo pacman -Rs xf86-video-nouveau --noconfirm
+sudo pacman -Rs xf86-video-vesa --noconfirm
 
 echo "################################################################"
-echo "#########   Packages installed - Reboot now     ################"
+echo "################### software removed"
 echo "################################################################"
+
+sudo mkinitcpio -P
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg

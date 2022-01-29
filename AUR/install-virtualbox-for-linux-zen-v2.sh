@@ -15,11 +15,11 @@ set -e
 #
 ##################################################################################################################
 echo "###########################################################################"
-echo "##      This script assumes you have the linux-lts kernel running        ##"
+echo "##     This script assumes you have the linux kernel running             ##"
 echo "###########################################################################"
 
 sudo pacman -S --noconfirm --needed virtualbox
-sudo pacman -S --noconfirm --needed linux-lts-headers
+sudo pacman -S --noconfirm --needed linux-hardened-headers
 sudo pacman -S --needed virtualbox-host-dkms
 
 echo "###########################################################################"
