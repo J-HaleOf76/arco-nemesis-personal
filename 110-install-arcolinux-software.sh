@@ -58,35 +58,15 @@ if grep -q arcolinux_repo /etc/pacman.conf; then
   sudo pacman -Sy
 fi
 
+sudo pacman -S --noconfirm --needed appstream
 sudo pacman -S --noconfirm --needed arcolinux-arc-themes-2021-sky-git
 sudo pacman -S --noconfirm --needed arcolinux-hblock-git
 sudo pacman -S --noconfirm --needed arcolinux-logout-git
+sudo pacman -S --noconfirm --needed arcolinux-pamac-all
 sudo pacman -S --noconfirm --needed arcolinux-tweak-tool-git
 sudo pacman -S --noconfirm --needed arcolinux-wallpapers-git
 
 ###############################################################################
-
-if [ ! -f /usr/local/bin/get-nemesis-on-arcolinux ]; then
-
-  echo
-  tput setaf 2
-  echo "################################################################"
-  echo "################### Correct pamac"
-  echo "################################################################"
-  tput sgr0
-  echo
-
-  [ -d /etc/pacman.d/hooks ] || sudo mkdir -p /etc/pacman.d/hooks
-
-  sudo pacman -S --noconfirm --needed appstream
-
-  sudo cp $installed_dir/Personal/settings/pacman-hook/archlinux-appstream-data-fix /usr/local/bin/archlinux-appstream-data-fix
-  sudo cp $installed_dir/Personal/settings/pacman-hook/archlinux-appstream-data.hook /etc/pacman.d/hooks/archlinux-appstream-data.hook
-
-  sudo pacman -S --noconfirm --needed arcolinux-pamac-all
-  sudo pacman -S --noconfirm archlinux-appstream-data
-
-fi
 
 # when on Plasma
 
@@ -113,6 +93,3 @@ echo "################### Done"
 echo "################################################################"
 tput sgr0
 echo
-
-
-

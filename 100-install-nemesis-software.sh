@@ -73,7 +73,4 @@ sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-grey-git
 
 #sudo pacman -S --noconfirm --needed edu-vimix-dark-tela-git
 
-if [ ! -f /usr/local/bin/get-nemesis-on-arcolinux ]; then
-  sudo pacman -S --noconfirm --needed edu-skel-git
-  sudo pacman -S --noconfirm --needed edu-system-git
-fi
+# edu-skel-git and edu-system-git are defined in the personal files
