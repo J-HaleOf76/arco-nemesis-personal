@@ -1,4 +1,4 @@
-favorites=arcolinux-welcome-app.desktop,arcolinux-tweak-tool.desktop,firefox.desktop,thunar.desktop,xfce4-terminal.desktop,conkyzen.desktop
+favorites=arcolinux-welcome-app.desktop,archlinux-tweak-tool.desktop,firefox.desktop,thunar.desktop,xfce4-terminal.desktop,conkyzen.desktop
 recent=
 button-title=Arch Linux \ \ 
 button-icon=start-here-archlinux
@@ -29,7 +29,7 @@ menu-height=583
 menu-opacity=80
 command-settings=xfce4-settings-manager
 show-command-settings=true
-command-lockscreen=arcolinux-logout
+command-lockscreen=archlinux-logout
 show-command-lockscreen=true
 command-switchuser=xfce4-session-logout -u
 show-command-switchuser=true

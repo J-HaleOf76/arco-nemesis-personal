@@ -95,11 +95,12 @@ if [ -f /usr/local/bin/get-nemesis-on-arcolinux ]; then
   sudo systemctl disable tlp.service
   sudo pacman -Rs tlp --noconfirm
   sudo pacman -Rs broadcom-wl-dkms --noconfirm
-  sudo pacman -Rs r8168-dkms --noconfirm
   sudo pacman -Rs xf86-video-amdgpu --noconfirm
   sudo pacman -Rs xf86-video-fbdev --noconfirm
   sudo pacman -Rs xf86-video-openchrome --noconfirm
-  sudo pacman -Rs xf86-video-vmware --noconfirm
+  if pacman -Qi xf86-video-vmware &> /dev/null; then
+    sudo pacman -Rs xf86-video-vmware --noconfirm
+  fi
   sudo pacman -Rs xf86-video-ati --noconfirm
   sudo pacman -Rs xf86-video-nouveau --noconfirm
   sudo pacman -Rs xf86-video-vesa --noconfirm
@@ -129,9 +130,12 @@ if grep -q "EndeavourOS" /etc/os-release; then
     sudo rm /etc/skel/.bashrc
   fi
 
+  sudo systemctl disable firewalld
+  sudo pacman -R --noconfirm firewalld
+
+
   sudo pacman -R --noconfirm arc-gtk-theme-eos
   sudo pacman -R --noconfirm endeavouros-skel-default endeavouros-skel-xfce4
-  sudo pacman -R --noconfirm firewalld
   sudo pacman -R --noconfirm modemmanager
   sudo pacman -R --noconfirm yay
 
