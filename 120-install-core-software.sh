@@ -72,6 +72,7 @@ sudo pacman -S --noconfirm --needed file-roller
 sudo pacman -S --noconfirm --needed firefox
 sudo pacman -S --noconfirm --needed fish
 sudo pacman -S --noconfirm --needed flameshot-git
+sudo pacman -S --noconfirm --needed fluent-icon-theme-git
 sudo pacman -S --noconfirm --needed font-manager
 sudo pacman -S --noconfirm --needed galculator
 sudo pacman -S --noconfirm --needed gimp
@@ -230,7 +231,7 @@ if [ -f /usr/share/xsessions/xfce.desktop ]; then
   tput sgr0
   echo
 
-  sudo pacman -S --noconfirm --needed arcolinux-kvantum-theme-arc-git
+  sudo pacman -S --noconfirm --needed arcolinux-arc-kde
   sudo pacman -S --noconfirm --needed menulibre
   sudo pacman -S --noconfirm --needed mugshot
   sudo pacman -S --noconfirm --needed prot16-xfce4-terminal
