@@ -72,7 +72,7 @@ sudo pacman -S --noconfirm --needed file-roller
 sudo pacman -S --noconfirm --needed firefox
 sudo pacman -S --noconfirm --needed fish
 sudo pacman -S --noconfirm --needed flameshot-git
-sudo pacman -S --noconfirm --needed fluent-icon-theme-git
+#sudo pacman -S --noconfirm --needed fluent-icon-theme-git
 sudo pacman -S --noconfirm --needed font-manager
 sudo pacman -S --noconfirm --needed galculator
 sudo pacman -S --noconfirm --needed gimp
@@ -116,6 +116,7 @@ sudo pacman -S --noconfirm --needed paru-bin
 sudo pacman -S --noconfirm --needed pavucontrol
 sudo pacman -S --noconfirm --needed playerctl
 sudo pacman -S --noconfirm --needed polkit-gnome
+sudo pacman -S --noconfirm --needed python-pylint
 sudo pacman -S --noconfirm --needed python-pywal
 sudo pacman -S --noconfirm --needed pv
 sudo pacman -S --noconfirm --needed qbittorrent
@@ -154,6 +155,7 @@ sudo pacman -S --noconfirm --needed vlc
 sudo pacman -S --noconfirm --needed wd719x-firmware
 sudo pacman -S --noconfirm --needed wget
 sudo pacman -S --noconfirm --needed wttr
+sudo pacman -S --noconfirm --needed xcolor
 sudo pacman -S --noconfirm --needed xdg-user-dirs
 sudo pacman -S --noconfirm --needed xorg-xkill
 sudo pacman -S --noconfirm --needed yay-bin
@@ -167,8 +169,9 @@ sudo pacman -S --noconfirm --needed pulseaudio-bluetooth
 sudo pacman -S --noconfirm --needed bluez
 sudo pacman -S --noconfirm --needed bluez-libs
 sudo pacman -S --noconfirm --needed bluez-utils
-sudo pacman -S --noconfirm --needed blueberry
-
+if [ ! -f /usr/share/xsessions/plasma.desktop ]; then
+  sudo pacman -S --noconfirm --needed blueberry
+fi
 sudo pacman -S --noconfirm --needed cups
 sudo pacman -S --noconfirm --needed cups-pdf
 sudo pacman -S --noconfirm --needed ghostscript

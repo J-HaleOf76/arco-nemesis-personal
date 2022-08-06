@@ -62,17 +62,21 @@ The ArcoLinux repos are added to your /etc/pacman.conf
 
 # ArchLinux Tweak Tool info
 
-ArchLinux Tweak Tool will work on these distro's
+Install the ATT from the AUR
 
-- ArcoLinux     - https://arcolinux.info
-- Arch Linux    - https://archlinux.org
-- Alci          - https://alci.online
-- Carli         - https://arcolinuxiso.com/
-- Ariser        - https://ariser.eu/
-- EndeavourOS   - https://endeavouros.com/
-- Garuda        - https://garudalinux.org/
+yay archlinux tweak
+
+paru archlinux tweak
+
+select the correct number and install it
+
+You can get the keys and mirrors in via the ATT
+
+You can find all information about the ATT here
+
+https://github.com/arcolinux/archlinux-tweak-tool
 
 
-ArchLinux Tweak Tool will NOT work on these distro's
+Watch the videos on ATT
 
-- Manjaro
+https://www.youtube.com/playlist?list=PLlloYVGq5pS5nvFc_LYRE82Gh3XWA6rVH
