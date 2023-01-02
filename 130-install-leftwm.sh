@@ -27,6 +27,18 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
+
+##################################################################################################################
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### Leftwm"
+echo "################################################################"
+tput sgr0
+echo
+
 func_install() {
     if pacman -Qi $1 &> /dev/null; then
         tput setaf 2
@@ -56,11 +68,10 @@ echo
 
 
 list=(
-arcolinux-leftwm-git
+edu-leftwm-git
 leftwm-dev-git
 leftwm-theme-git
 lxappearance
-nerd-fonts-source-code-pro
 picom
 polybar
 rofi-theme-fonts
@@ -69,6 +80,7 @@ ttf-fantasque-sans-mono
 ttf-iosevka-nerd
 ttf-material-design-iconic-font
 ttf-meslo-nerd-font-powerlevel10k
+ttf-sourcecodepro-nerd
 volumeicon
 )
 
@@ -84,25 +96,27 @@ done
 
 if [ -f /usr/share/xsessions/leftwm.desktop ]; then
 
-  echo
-  tput setaf 2
-  echo "################################################################"
-  echo "################### Leftwm related applications"
-  echo "################################################################"
-  tput sgr0
-  echo
+    echo
+    tput setaf 2
+    echo "################################################################"
+    echo "################### Leftwm related applications"
+    echo "################################################################"
+    tput sgr0
+    echo
 
+    #cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S)
+    #cp -arf /etc/skel/.config/leftwm $HOME/.config
 
-  #sh ~/.config/leftwm/scripts/install-all-arcolinux-themes.sh
-  #sh ~/.config/leftwm/scripts/install-all-arcolinux-community-themes.sh
+    #sh ~/.config/leftwm/scripts/install-all-arcolinux-themes.sh
+    #sh ~/.config/leftwm/scripts/install-all-arcolinux-community-themes.sh
 
-  #leftwm-theme update
-  #leftwm-theme apply db-nemesis
+    #leftwm-theme update
+    #leftwm-theme apply db-nemesis
 
 fi
 
 echo
-tput setaf 2
+tput setaf 6
 echo "################################################################"
 echo "################### Done"
 echo "################################################################"

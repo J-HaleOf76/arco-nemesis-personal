@@ -27,7 +27,19 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
+
+##################################################################################################################
+
 #nemesis-repo added to /etc/pacman.conf
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### nemesis"
+echo "################################################################"
+tput sgr0
+echo
 
 if grep -q nemesis_repo /etc/pacman.conf; then
 
@@ -64,13 +76,23 @@ echo "################################################################"
 tput sgr0
 echo
 
-sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-git
-sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-mint-grey-git
-sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-mint-red-git
-sudo pacman -S --noconfirm --needed edu-candy-beauty-tela-git
-sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-git
-sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-grey-git
+# sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-git
+# sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-mint-grey-git
+# sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-mint-red-git
+# sudo pacman -S --noconfirm --needed edu-candy-beauty-tela-git
+# sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-git
+# sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-grey-git
 
 #sudo pacman -S --noconfirm --needed edu-vimix-dark-tela-git
 
 # edu-skel-git and edu-system-git are defined in the personal files
+
+echo "Nothing to do "
+
+echo
+tput setaf 6
+echo "################################################################"
+echo "################### Done"
+echo "################################################################"
+tput sgr0
+echo

@@ -27,15 +27,17 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
+
+##################################################################################################################
+
 # software from AUR (Arch User Repositories)
 # https://aur.archlinux.org/packages/
-
-installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 echo
 tput setaf 2
 echo "################################################################"
-echo "################### AUR Folder - Software to install"
+echo "################### AUR from folder - Software to install"
 echo "################################################################"
 tput sgr0
 echo
@@ -52,13 +54,13 @@ if [ $result = "none" ];then
 	tput sgr0
 	echo	
 
-	sh AUR/install-virtualbox-for-linux-v2.sh	
+	sh AUR/install-virtualbox-for-linux.sh	
 
 else
 
 
 	echo
-	tput setaf 2
+	tput setaf 3
 	echo "################################################################"
 	echo "### You are on a virtual machine - skipping VirtualBox"
 	echo "################################################################"
@@ -75,9 +77,9 @@ echo "Wait for it ..."
 sudo hardcode-fixer
 
 echo
-tput setaf 2
+tput setaf 6
 echo "################################################################"
-echo "################### AUR Software installed"
+echo "################### Done"
 echo "################################################################"
 tput sgr0
 echo

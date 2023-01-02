@@ -27,6 +27,10 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
+
+##################################################################################################################
+
 # software from AUR (Arch User Repositories)
 # https://aur.archlinux.org/packages/
 
@@ -38,14 +42,12 @@ echo "################################################################"
 tput sgr0
 echo
 
-installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
-
-sh $installed_dir/AUR/install-sardi-mint-y-icons-v*.sh
+sh $installed_dir/AUR/install-sardi-mint-y-icons.sh
 
 echo
-tput setaf 2
+tput setaf 6
 echo "################################################################"
-echo "################### Sardi extra icons MINT installed"
+echo "################### Done"
 echo "################################################################"
 tput sgr0
 echo

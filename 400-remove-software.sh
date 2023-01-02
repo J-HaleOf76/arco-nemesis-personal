@@ -27,7 +27,62 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
-# when on CARLI - remove conflicting files 
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### Remove software"
+echo "################################################################"
+tput sgr0
+echo
+
+sudo pacman -R --noconfirm adobe-source-han-sans-cn-fonts
+sudo pacman -R --noconfirm adobe-source-han-sans-jp-fonts
+sudo pacman -R --noconfirm adobe-source-han-sans-kr-fonts
+sudo pacman -R --noconfirm archinstall
+
+# remove where ever we are
+
+sudo pacman -R --noconfirm xfce4-artwork
+
+sudo rm -rf /usr/share/backgrounds/xfce
+
+sudo pacman -Rs broadcom-wl-dkms --noconfirm
+sudo pacman -Rs xf86-video-amdgpu --noconfirm
+sudo pacman -Rs xf86-video-fbdev --noconfirm
+sudo pacman -Rs xf86-video-openchrome --noconfirm
+if pacman -Qi xf86-video-vmware &> /dev/null; then
+  sudo pacman -Rs xf86-video-vmware --noconfirm
+fi
+sudo pacman -Rs xf86-video-ati --noconfirm
+sudo pacman -Rs xf86-video-nouveau --noconfirm
+sudo pacman -Rs xf86-video-vesa --noconfirm
+
+# when on Arch Linux - remove conflicting files
+
+if grep -q "archlinux" /etc/os-release; then
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "############### Removing software for Arch"
+  echo "################################################################"
+  tput sgr0
+
+  if [ -f /etc/skel/.bashrc ]; then
+    sudo rm /etc/skel/.bashrc
+  fi
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "################### Software removed"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+fi
+
+# when on CARLI - remove conflicting files
 
 if [ -f /usr/local/bin/get-nemesis-on-carli ]; then
 
@@ -66,11 +121,10 @@ if [ -f /usr/local/bin/get-nemesis-on-ariser ]; then
   echo "################################################################"
   tput sgr0
   echo
+
   if [ -f /etc/skel/.bashrc ]; then
     sudo rm /etc/skel/.bashrc
   fi
-  #sudo rm /etc/skel/.Xresources
-  #sudo pacman -R --noconfirm grml-zsh-config
 
   echo
   tput setaf 2
@@ -83,7 +137,7 @@ fi
 
 # when on ARCOLINUX - remove conflicting files
 
-if [ -f /usr/local/bin/get-nemesis-on-arcolinux ]; then
+if grep -q "ArcoLinux" /etc/os-release; then
   echo
   tput setaf 2
   echo "################################################################"
@@ -92,18 +146,8 @@ if [ -f /usr/local/bin/get-nemesis-on-arcolinux ]; then
   tput sgr0
   echo
 
-  sudo systemctl disable tlp.service
-  sudo pacman -Rs tlp --noconfirm
-  sudo pacman -Rs broadcom-wl-dkms --noconfirm
-  sudo pacman -Rs xf86-video-amdgpu --noconfirm
-  sudo pacman -Rs xf86-video-fbdev --noconfirm
-  sudo pacman -Rs xf86-video-openchrome --noconfirm
-  if pacman -Qi xf86-video-vmware &> /dev/null; then
-    sudo pacman -Rs xf86-video-vmware --noconfirm
-  fi
-  sudo pacman -Rs xf86-video-ati --noconfirm
-  sudo pacman -Rs xf86-video-nouveau --noconfirm
-  sudo pacman -Rs xf86-video-vesa --noconfirm
+  #sudo systemctl disable tlp.service
+  #sudo pacman -Rs tlp --noconfirm
 
   echo
   tput setaf 2
@@ -133,9 +177,8 @@ if grep -q "EndeavourOS" /etc/os-release; then
   sudo systemctl disable firewalld
   sudo pacman -R --noconfirm firewalld
 
-
   sudo pacman -R --noconfirm arc-gtk-theme-eos
-  sudo pacman -R --noconfirm endeavouros-skel-default endeavouros-skel-xfce4
+  sudo pacman -Rdd --noconfirm endeavouros-skel-default endeavouros-skel-xfce4
   sudo pacman -R --noconfirm modemmanager
   sudo pacman -R --noconfirm yay
 
@@ -186,7 +229,6 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
   sudo pacman -R --noconfirm systemd-resolvconf
   sudo pacman -R --noconfirm xbitmaps
   sudo pacman -R --noconfirm xfburn
-  sudo pacman -R --noconfirm xfce4-artwork
   sudo pacman -R --noconfirm xterm
   sudo pacman -Rs --noconfirm brltty
   sudo pacman -Rs --noconfirm espeak-ng
@@ -234,3 +276,63 @@ if grep -q "Garuda" /etc/os-release; then
   echo
 
 fi
+
+
+# when on SIERRA - remove conflicting files
+
+if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "############### Removing software for Sierra"
+  echo "################################################################"
+  tput sgr0
+
+  if [ -f /etc/skel/.bashrc ]; then
+    sudo rm /etc/skel/.bashrc
+  fi
+  sudo pacman -R --noconfirm amd-ucode
+  sudo pacman -R --noconfirm b43-fwcutter
+  sudo pacman -R --noconfirm broadcom-wl
+  sudo pacman -R --noconfirm broadcom-wl-dkms  
+  sudo pacman -Rs --noconfirm cloud-init
+  sudo pacman -R --noconfirm darkhttpd
+  sudo pacman -R --noconfirm dhcpcd
+  sudo pacman -R --noconfirm ell  
+  sudo pacman -R --noconfirm grml-zsh-config
+  sudo pacman -R --noconfirm iwd
+  sudo pacman -R --noconfirm kitty-terminfo
+  sudo pacman -R --noconfirm lftp
+  sudo pacman -R --noconfirm livecd-sounds
+  sudo pacman -R --noconfirm lua53
+  sudo pacman -R --noconfirm luit
+  sudo pacman -R --noconfirm lynx
+  sudo pacman -R --noconfirm mousepad
+  sudo pacman -R --noconfirm nmap
+  sudo pacman -R --noconfirm parole
+  sudo pacman -R --noconfirm systemd-resolvconf
+  sudo pacman -R --noconfirm xbitmaps
+  sudo pacman -R --noconfirm xfburn
+  sudo pacman -R --noconfirm xterm
+  sudo pacman -Rs --noconfirm brltty
+  sudo pacman -Rs --noconfirm espeak-ng
+  sudo pacman -Rs --noconfirm espeakup
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "################### Software removed"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+fi
+
+echo
+tput setaf 6
+echo "################################################################"
+echo "################### Done"
+echo "################################################################"
+tput sgr0
+echo

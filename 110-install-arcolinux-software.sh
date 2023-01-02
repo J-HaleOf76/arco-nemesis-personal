@@ -29,6 +29,8 @@
 
 installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
+##################################################################################################################
+
 echo
 tput setaf 2
 echo "################################################################"
@@ -42,7 +44,7 @@ if grep -q arcolinux_repo /etc/pacman.conf; then
   echo
   tput setaf 2
   echo "################################################################"
-  echo "################ ArcoLinux repos are already in /etc/pacman.conf"
+  echo "################ ArcoLinux repos are already in /etc/pacman.conf "
   echo "################################################################"
   tput sgr0
   echo
@@ -58,15 +60,14 @@ if grep -q arcolinux_repo /etc/pacman.conf; then
   sudo pacman -Sy
 fi
 
-sudo pacman -S --noconfirm --needed appstream
-sudo pacman -S --noconfirm --needed arcolinux-arc-dawn-git
-sudo pacman -S --noconfirm --needed arcolinux-hblock-git
+sudo pacman -S --noconfirm --needed arcolinux-candy-beauty-git
 
+sudo pacman -S --noconfirm --needed arcolinux-arc-dawn-git
+
+sudo pacman -S --noconfirm --needed arcolinux-hblock-git
 sudo pacman -S --noconfirm --needed arcolinux-pamac-all
 sudo pacman -S --noconfirm --needed archlinux-tweak-tool-git
 sudo pacman -S --noconfirm --needed arcolinux-wallpapers-git
-
-sudo pacman -S --noconfirm --needed visual-studio-code-bin
 
 if [ ! -f /usr/bin/startplasma-x11 ]; then
   sudo pacman -S --noconfirm --needed archlinux-logout-git
@@ -92,8 +93,23 @@ if [ -f /usr/bin/startplasma-x11 ]; then
   sudo pacman -S --noconfirm --needed surfn-plasma-light-icons-git
 fi
 
+
+if [ -f /usr/share/xsessions/xfce.desktop ]; then
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "################### Installing software for Xfce"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+  sudo pacman -S --noconfirm --needed arcolinux-arc-kde
+
+fi
+
 echo
-tput setaf 2
+tput setaf 6
 echo "################################################################"
 echo "################### Done"
 echo "################################################################"
