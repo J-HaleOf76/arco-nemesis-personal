@@ -336,3 +336,42 @@ echo "################### Done"
 echo "################################################################"
 tput sgr0
 echo
+
+# when on Archman - remove conflicting files
+
+if grep -q "Archman" /etc/os-release; then
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "############### Removing software for Archman"
+  echo "################################################################"
+  tput sgr0
+
+  sudo systemctl disable firewalld
+  sudo pacman -R --noconfirm firewalld
+  sudo pacman -R --noconfirm imagewriter
+  sudo pacman -R --noconfirm surfn-icons
+  sudo pacman -R --noconfirm grml-zsh-config
+
+  sudo rm -r /etc/skel/.config/Thunar
+  sudo rm -r /etc/skel/.config/xfce4
+
+  sudo rm /etc/skel/.config/mimeapps.list
+  sudo rm /etc/skel/.face
+  sudo rm /etc/skel/.xinitrc
+  sudo rm /etc/skel/.zshrc
+
+  sudo rm /etc/X11/xorg.conf.d/99-killX.conf
+  sudo rm /etc/modprobe.d/disable-evbug.conf
+  sudo rm /etc/modprobe.d/nobeep.conf
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "################### Software removed"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+fi

@@ -38,6 +38,12 @@ echo "################### Personal settings to reset to default"
 echo "################################################################"
 tput sgr0
 echo
+echo "To personal Kvantum setup"
+echo
+[ -d $HOME"/.config/Kvantum" ] || mkdir -p $HOME"/.config/Kvantum"
+cp -r $installed_dir/settings/Kvantum/* $HOME/.config/Kvantum
+sudo cp -r $installed_dir/settings/Kvantum/* /etc/skel/.config/Kvantum
+echo
 echo "To default xfce settings"
 echo
 [ -d $HOME"/.config/xfce4/xfconf/xfce-perchannel-xml/" ] || mkdir -p $HOME"/.config/xfce4/xfconf/xfce-perchannel-xml/"
@@ -90,10 +96,10 @@ tput sgr0
 echo
 echo "Installing all shell files"
 echo
-cp $installed_dir/settings/shell-personal/.bashrc-personal ~
-cp $installed_dir/settings/shell-personal/.zshrc ~
-sudo cp $installed_dir/settings/shell-personal/.zshrc /etc/skel/~
-cp $installed_dir/settings/shell-personal/.zshrc-personal ~
+cp $installed_dir/settings/shell-personal/.bashrc-personal ~/.bashrc-personal
+cp $installed_dir/settings/shell-personal/.zshrc ~/.zshrc
+sudo cp $installed_dir/settings/shell-personal/.zshrc /etc/skel/.zshrc
+cp $installed_dir/settings/shell-personal/.zshrc-personal ~/.zshrc-personal
 cp $installed_dir/settings/fish/alias.fish ~/.config/fish/alias.fish
 echo
 echo "Installing personal settings of variety"

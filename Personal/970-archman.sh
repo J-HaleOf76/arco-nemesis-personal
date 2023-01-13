@@ -31,24 +31,50 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-if grep -q "ArcoLinux" /etc/os-release; then
+if grep -q "Archman" /etc/os-release; then
 
 	echo
 	tput setaf 2
 	echo "################################################################"
-	echo "################### We are on ArcoLinux"
+	echo "################### We are on ARCHMAN"
 	echo "################################################################"
 	tput sgr0
 	echo
 
+	echo "Removing conflicting folders"
+	sudo rm /etc/skel/.zshrc
+	sudo rm -r /etc/skel/.config/Thunar
+	
 	echo
-	echo "Change gtk-3.0 config"
-	echo
-	FIND="Sardi-Arc"
-	REPLACE="Surfn-Arc"
-	sed -i "s/$FIND/$REPLACE/g" $HOME/.config/gtk-3.0/settings.ini
-	sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/gtk-3.0/settings.ini
+	echo "Installing edu packages"
+	sudo pacman -S --noconfirm --needed edu-skel-git
+  	sudo pacman -S --noconfirm --needed edu-xfce-git
+  	sudo pacman -S --noconfirm --needed edu-system-git
 
+	echo
+	echo "Pacman parallel downloads	"
+	FIND="#ParallelDownloads = 5"
+	REPLACE="ParallelDownloads = 5"
+	sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
+
+	echo
+	echo "Bootloader time to 1 second"
+	if [ -f /boot/loader/loader.conf ]; then
+		FIND="timeout 5"
+		REPLACE="timeout 1"
+		sudo sed -i "s/$FIND/$REPLACE/g" /boot/loader/loader.conf
+
+	fi
+	echo
+
+	echo
+	echo "Adding nanorc"
+	if [ -f /etc/nanorc ]; then
+    	sudo cp $installed_dir/settings/nano/nanorc /etc/nanorc
+	fi
+
+	echo	
+	echo "When on Xfce4"
 	if [ -f /usr/share/xsessions/xfce.desktop ]; then
 		echo
 		tput setaf 2
@@ -57,10 +83,15 @@ if grep -q "ArcoLinux" /etc/os-release; then
 		echo "################################################################"
 		tput sgr0
 		echo
-		
+
+		cp -arf /etc/skel/. ~
+		cp -arf /etc/skel/.config ~
+
 		echo
-		echo "Changing the icons and theme"
+		echo "Changing the whiskermenu"
 		echo
+		cp $installed_dir/settings/archlinux/whiskermenu-7.rc ~/.config/xfce4/panel/whiskermenu-7.rc
+		sudo cp $installed_dir/settings/archlinux/whiskermenu-7.rc /etc/skel/.config/xfce4/panel/whiskermenu-7.rc
 
 		FIND="Arc-Dark"
 		REPLACE="Arc-Dawn-Dark"
@@ -68,52 +99,11 @@ if grep -q "ArcoLinux" /etc/os-release; then
 		sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
 		FIND="Sardi-Arc"
-		REPLACE="Surfn-Arc"
+		REPLACE="arcolinux-candy-beauty"
 		sed -i "s/$FIND/$REPLACE/g" ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 		sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
 	fi
-
-	if [ -f /usr/share/wayland-sessions/sway.desktop ]; then
-		echo
-		tput setaf 2
-		echo "################################################################"
-		echo "################### We are on Sway"
-		echo "################################################################"
-		tput sgr0
-		echo
-		
-		echo
-		echo "Installing extra packages"
-		echo
-
-		sudo pacman -S --noconfirm --needed wf-recorder
-
-	fi
-
-	if [ -f /usr/share/wayland-sessions/hyprland.desktop ]; then
-		echo
-		tput setaf 2
-		echo "################################################################"
-		echo "################### We are on Hyprland"
-		echo "################################################################"
-		tput sgr0
-		echo
-		
-		echo
-		echo "Installing extra packages"
-		echo
-
-		sudo pacman -S --noconfirm --needed wf-recorder
-
-	fi
-
-	echo
-	echo "ArchLinux Logout - handy icons"
-	echo
-	[ -d $HOME"/.config/archlinux-logout/" ] || mkdir -p $HOME"/.config/archlinux-logout"
-	cp  $installed_dir/settings/archlinux-logout/archlinux-logout-handy.conf $HOME/.config/archlinux-logout/archlinux-logout.conf
-	sudo cp  $installed_dir/settings/archlinux-logout/archlinux-logout-handy.conf /etc/archlinux-logout.conf
 
 	echo
 	tput setaf 6
