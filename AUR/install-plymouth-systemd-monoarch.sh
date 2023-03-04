@@ -27,24 +27,34 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+# https://wiki.archlinux.org/title/Plymouth
+
+if [ ! -d /boot/loader/entries ] ; then 
+	echo "You do not seem to be on a systemd-boot enabled system"
+	echo "Run the script for grub"
+	exit 1
+fi
+
 echo "###########################################################################"
-echo "##     This script assumes you have the linux kernel running             ##"
+echo "## This script will install plymouth and themes on a systemd-boot system ##"
 echo "###########################################################################"
 
-sudo pacman -S --noconfirm --needed virtualbox
-sudo pacman -S --noconfirm --needed linux-hardened-headers
-sudo pacman -S --needed virtualbox-host-dkms
+sudo pacman -S --noconfirm --needed plymouth
+sudo pacman -S --noconfirm --needed plymouth-theme-monoarch
 
 echo "###########################################################################"
-echo "##      Removing all the messages virtualbox produces         ##"
+echo "##                       Changing the needed files                       ##"
 echo "###########################################################################"
-VBoxManage setextradata global GUI/SuppressMessages "all"
 
-# resolution issues Jan/2023
-# VBoxManage setextradata "Your Virtual Machine Name" "VBoxInternal2/EfiGraphicsResolution" "2560x1440"
-# VBoxManage setextradata "Your Virtual Machine Name" "VBoxInternal2/EfiGraphicsResolution" "1920x1080"
-# graphical driver - VMSVGA !
-# see : https://wiki.archlinux.org/title/VirtualBox#Set_guest_starting_resolution
+FIND="HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block fsck filesystems)"
+REPLACE="HOOKS=(base systemd sd-plymouth autodetect keyboard sd-vconsole modconf block fsck filesystems)"
+sudo sed -i "s/$FIND/$REPLACE/g" /etc/mkinitcpio.conf
+
+FIND="options initrd=initramfs-linux.img"
+REPLACE="options initrd=initramfs-linux.img quiet splash vt.global_cursor_default=0"
+sudo sed -i "s/$FIND/$REPLACE/g" /boot/loader/entries/arch-linux.conf
+
+sudo plymouth-set-default-theme -R monoarch
 
 echo "###########################################################################"
 echo "#########               You have to reboot.                       #########"

@@ -31,35 +31,45 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-echo
-tput setaf 3
-echo "Installing personal settings of variety - second time"
-echo
-[ -d $HOME"/.config/variety" ] || mkdir -p $HOME"/.config/variety"
-cp $installed_dir/settings/variety/variety.conf ~/.config/variety/
-[ -d /etc/skel/.config/variety ] || sudo mkdir -p /etc/skel/.config/variety
-sudo cp $installed_dir/settings/variety/variety.conf /etc/skel/.config/variety/
-tput sgr0
-echo
+if grep -q "archcraft" /etc/os-release; then
 
-echo
-tput setaf 3
-echo "################################################################"
-echo "FINAL SKEL"
-echo "Copying all files and folders from /etc/skel to ~"
-echo "First we make a backup of .config"
-echo "Wait for it ...."
-echo "################################################################"
-tput sgr0
-echo
+	echo
+	tput setaf 2
+	echo "################################################################"
+	echo "################### We are on Archcraft"
+	echo "################################################################"
+	tput sgr0
+	echo
 
-cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S)
-cp -arf /etc/skel/. ~
+	echo
+	tput setaf 2
+	echo "################################################################"
+	echo "################### Installing packages"
+	echo "################################################################"
+	tput sgr0
+	echo
 
-echo
-tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
-tput sgr0
-echo
+	echo
+	sudo pacman -S --noconfirm --needed edu-skel-git
+  	sudo pacman -S --noconfirm --needed edu-xfce-git
+  	sudo pacman -S --noconfirm --needed edu-system-git
+
+	echo
+	echo "################################################################"
+	echo "Getting latest /etc/nsswitch.conf from ArcoLinux"
+	echo "################################################################"
+	echo
+	sudo cp /etc/nsswitch.conf /etc/nsswitch.conf.bak
+	sudo wget https://raw.githubusercontent.com/arcolinux/arcolinuxl-iso/master/archiso/airootfs/etc/nsswitch.conf -O $workdir/etc/nsswitch.conf
+
+
+	echo
+	tput setaf 6
+	echo "################################################################"
+	echo "################### Done"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+fi
+

@@ -40,10 +40,18 @@ tput sgr0
 echo
 
 echo
+echo "Adding xorg xkill"
+echo
+[ -d /etc/X11/xorg.conf.d/ ] || mkdir -p /etc/X11/xorg.conf.d/
+sudo cp  settings/xorg/* /etc/X11/xorg.conf.d/
+echo
+
+echo
 echo "copying cursor file"
 if [ -d /usr/share/icons/default/cursors ]; then
 	sudo rm /usr/share/icons/default/cursors
 fi
+[ -d /usr/share/icons/default ] || sudo mkdir -p /usr/share/icons/default
 sudo cp -f $installed_dir/settings/cursor/* /usr/share/icons/default
 echo
 
@@ -66,6 +74,9 @@ if [ $test == "enabled" ] && [ $result == "none" ] || [ $result == "oracle" ]; t
 	sudo systemctl disable qemu-guest-agent.service
 	echo
 fi
+
+echo
+echo "Adding nanorc settings"
 
 if [ -f /etc/nanorc ]; then
 	sudo cp $installed_dir/settings/nano/nanorc /etc/nanorc

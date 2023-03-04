@@ -31,14 +31,14 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-# we are on Sierra
+# we are on Area
 
-if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
+if [ -f /usr/local/bin/get-nemesis-on-area ]; then
 
 	echo
 	tput setaf 2
 	echo "################################################################"
-	echo "################### We are on Sierra"
+	echo "################### We are on Area"
 	echo "################################################################"
 	tput sgr0
 	echo
@@ -114,7 +114,7 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 		echo
 	fi
 
-	if grep -q 'ascii_distro="arcolinux_small"' /etc/skel/.config/neofetch/config.conf; then
+	if grep -q 'ascii_distro="arcolinux_small"' $HOME/.config/neofetch/config.conf; then
 		echo "Change from Arco logo to Arch logo"
 		FIND='ascii_distro="arcolinux_small"'
 		REPLACE='ascii_distro="archlinux"'
@@ -168,28 +168,14 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 	sudo sed -i "s/$FIND/$REPLACE/g" /etc/systemd/journald.conf
 
 	echo
-	echo "ArchLinux Logout - handy icons"
+	echo "ArchLinux Logout - beauty icons"
 	echo
 
 	[ -d $HOME"/.config/archlinux-logout/" ] || mkdir -p $HOME"/.config/archlinux-logout"
-	cp  $installed_dir/settings/archlinux-logout/archlinux-logout-handy.conf $HOME/.config/archlinux-logout/archlinux-logout.conf
-	sudo cp  $installed_dir/settings/archlinux-logout/archlinux-logout-hand.conf /etc/archlinux-logout.conf
-
-	echo
-	echo "Azerty config"
-	cp -v $HOME/.config/arco-chadwm/chadwm/config.def-azerty.h $HOME/.config/arco-chadwm/chadwm/config.def.h
+	cp  $installed_dir/settings/archlinux-logout/archlinux-logout-beauty.conf $HOME/.config/archlinux-logout/archlinux-logout.conf
+	sudo cp  $installed_dir/settings/archlinux-logout/archlinux-logout-beauty.conf /etc/archlinux-logout.conf
 	echo
 
-	if [ -f $HOME/.config/arco-chadwm/chadwm/config.h ]; then
-		rm $HOME/.config/arco-chadwm/chadwm/config.h
-	fi
-
-	cd $HOME/.config/arco-chadwm/chadwm/
-	make
-	sudo make install
-
-	echo
-	echo
 	tput setaf 6
 	echo "################################################################"
 	echo "################### Done"

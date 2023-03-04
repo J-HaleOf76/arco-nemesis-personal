@@ -67,7 +67,6 @@ func_install_chadwm() {
     edu-skel-git
     edu-system-git
     edu-xfce-git
-    arcolinux-chadwm-pacman-hook-git
     arcolinux-paleofetch-git
     arcolinux-wallpapers-candy-git
     arcolinux-wallpapers-git
@@ -79,6 +78,7 @@ func_install_chadwm() {
     gvfs
     lolcat
     lxappearance
+    pa-applet-git
     picom
     polkit-gnome
     rofi
@@ -88,6 +88,7 @@ func_install_chadwm() {
     thunar-archive-plugin
     thunar-volman
     ttf-hack
+    ttf-jetbrains-mono-nerd
     volumeicon
     xfce4-notifyd
     xfce4-power-manager
@@ -114,6 +115,52 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
     tput setaf 2
     echo "################################################################"
     echo "################### We are on SIERRA"
+    echo "################################################################"
+    tput sgr0
+    echo
+
+    func_install_chadwm
+
+    echo
+    tput setaf 6
+    echo "################################################################"
+    echo "################### Done"
+    echo "################################################################"
+    tput sgr0
+    echo
+
+fi
+
+if grep -q "archcraft" /etc/os-release; then
+
+    echo
+    tput setaf 2
+    echo "################################################################"
+    echo "################### We are on Archcraft"
+    echo "################################################################"
+    tput sgr0
+    echo
+
+    func_install_chadwm
+
+    echo
+    tput setaf 6
+    echo "################################################################"
+    echo "################### Done"
+    echo "################################################################"
+    tput sgr0
+    echo
+
+fi
+
+# install chadwm on Area
+
+if [ -f /usr/local/bin/get-nemesis-on-area ]; then
+
+    echo
+    tput setaf 2
+    echo "################################################################"
+    echo "################### We are on Area"
     echo "################################################################"
     tput sgr0
     echo

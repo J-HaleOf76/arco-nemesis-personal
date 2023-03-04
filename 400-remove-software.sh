@@ -30,7 +30,7 @@
 echo
 tput setaf 3
 echo "################################################################"
-echo "################### Remove software"
+echo "################### Remove software for all"
 echo "################################################################"
 tput sgr0
 echo
@@ -47,6 +47,7 @@ sudo pacman -R --noconfirm xfce4-artwork
 sudo rm -rf /usr/share/backgrounds/xfce
 
 sudo pacman -Rs broadcom-wl-dkms --noconfirm
+sudo pacman -Rs rtl8821cu-morrownr-dkms-git --noconfirm
 sudo pacman -Rs xf86-video-amdgpu --noconfirm
 sudo pacman -Rs xf86-video-fbdev --noconfirm
 sudo pacman -Rs xf86-video-openchrome --noconfirm
@@ -57,8 +58,16 @@ sudo pacman -Rs xf86-video-ati --noconfirm
 sudo pacman -Rs xf86-video-nouveau --noconfirm
 sudo pacman -Rs xf86-video-vesa --noconfirm
 
-# when on Arch Linux - remove conflicting files
+# always put the current .bashrc .zshrc away
+if [ -f /etc/skel/.bashrc ]; then
+  sudo mv /etc/skel/.bashrc /etc/skel/.bashrc-old
+fi
 
+if [ -f /etc/skel/.zshrc ]; then
+  sudo mv /etc/skel/.zshrc /etc/skel/.zshrc-old
+fi
+
+# when on Arch Linux - remove conflicting files
 if grep -q "archlinux" /etc/os-release; then
 
   echo
@@ -67,10 +76,9 @@ if grep -q "archlinux" /etc/os-release; then
   echo "############### Removing software for Arch"
   echo "################################################################"
   tput sgr0
+  echo
 
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi
+  echo "Nothing to remove"
 
   echo
   tput setaf 2
@@ -89,13 +97,11 @@ if [ -f /usr/local/bin/get-nemesis-on-carli ]; then
   echo
   tput setaf 2
   echo "################################################################"
-  echo "################### Removing software from Carli"
+  echo "################### Removing software for Carli"
   echo "################################################################"
   tput sgr0
   echo
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi  
+
   sudo pacman -R --noconfirm carli-xfce-config
   sudo pacman -R --noconfirm grml-zsh-config
   sudo pacman -R --noconfirm systemd-resolvconf
@@ -117,14 +123,12 @@ if [ -f /usr/local/bin/get-nemesis-on-ariser ]; then
   echo
   tput setaf 2
   echo "################################################################"
-  echo "################### Removing software from ARISER"
+  echo "################### Removing software for ARISER"
   echo "################################################################"
   tput sgr0
   echo
 
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi
+  echo "Nothing to do"
 
   echo
   tput setaf 2
@@ -141,13 +145,12 @@ if grep -q "ArcoLinux" /etc/os-release; then
   echo
   tput setaf 2
   echo "################################################################"
-  echo "#######Software to remove from an ArcoLinux installation"
+  echo "####### Removing software for ArcoLinux"
   echo "################################################################"
   tput sgr0
   echo
 
-  #sudo systemctl disable tlp.service
-  #sudo pacman -Rs tlp --noconfirm
+  echo "Nothing to do"
 
   echo
   tput setaf 2
@@ -169,18 +172,22 @@ if grep -q "EndeavourOS" /etc/os-release; then
   echo "############### Removing software for EOS"
   echo "################################################################"
   tput sgr0
-
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi
+  echo
 
   sudo systemctl disable firewalld
   sudo pacman -R --noconfirm firewalld
 
   sudo pacman -R --noconfirm arc-gtk-theme-eos
   sudo pacman -Rdd --noconfirm endeavouros-skel-default endeavouros-skel-xfce4
-  sudo pacman -R --noconfirm modemmanager
+  sudo pacman -Rdd --noconfirm modemmanager modemmanager-qt
   sudo pacman -R --noconfirm yay
+
+  # sudo rm -r /etc/skel/.config/Kvantum
+  # sudo rm -r /etc/skel/.config/gtk-3.0
+  # sudo rm -r /etc/skel/.config/variety
+  # sudo rm -r /etc/skel/.config/Thunar
+  # sudo rm -r /etc/skel/.config/xfce4
+  # sudo rm -r /etc/skel/.zshrc
 
   echo
   tput setaf 2
@@ -202,10 +209,8 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
   echo "############### Removing software for ALCI"
   echo "################################################################"
   tput sgr0
+  echo
 
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi
   sudo rm /etc/skel/.Xresources
   sudo pacman -R --noconfirm amd-ucode
   sudo pacman -R --noconfirm b43-fwcutter
@@ -252,20 +257,17 @@ if grep -q "Garuda" /etc/os-release; then
   echo
   tput setaf 2
   echo "################################################################"
-  echo "############### Removing software for EOS"
+  echo "############### Removing software for Garuda"
   echo "################################################################"
   tput sgr0
-
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi
+  echo
 
   sudo pacman -R --noconfirm blueman
   sudo pacman -R --noconfirm garuda-xfce-settings
   sudo pacman -R --noconfirm garuda-common-settings
   sudo pacman -R --noconfirm garuda-bash-config
   sudo pacman -R --noconfirm redshift
-  sudo pacman -R --noconfirm hblock
+  sudo pacman -Rdd --noconfirm hblock
 
   echo
   tput setaf 2
@@ -288,10 +290,8 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
   echo "############### Removing software for Sierra"
   echo "################################################################"
   tput sgr0
+  echo
 
-  if [ -f /etc/skel/.bashrc ]; then
-    sudo rm /etc/skel/.bashrc
-  fi
   sudo pacman -R --noconfirm amd-ucode
   sudo pacman -R --noconfirm b43-fwcutter
   sudo pacman -R --noconfirm broadcom-wl
@@ -360,11 +360,45 @@ if grep -q "Archman" /etc/os-release; then
   sudo rm /etc/skel/.config/mimeapps.list
   sudo rm /etc/skel/.face
   sudo rm /etc/skel/.xinitrc
-  sudo rm /etc/skel/.zshrc
 
   sudo rm /etc/X11/xorg.conf.d/99-killX.conf
   sudo rm /etc/modprobe.d/disable-evbug.conf
   sudo rm /etc/modprobe.d/nobeep.conf
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "################### Software removed"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+fi
+
+
+# when on Archcraft - remove conflicting files
+if grep -q "archcraft" /etc/os-release; then
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "############### Removing software for Archcraft"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+  sudo rm -r /etc/skel/.config/*
+  sudo rm /etc/skel/.dmrc
+  sudo rm /etc/skel/.face
+  sudo rm /etc/skel/.gtkrc-2.0
+
+  sudo pacman -R --noconfirm archcraft-skeleton
+  sudo pacman -R --noconfirm archcraft-omz
+  sudo pacman -R --noconfirm archcraft-skeleton
+  sudo pacman -R --noconfirm archcraft-openbox
+  sudo pacman -R --noconfirm archcraft-gtk-theme-arc
+  sudo pacman -R --noconfirm archcraft-config-qt
+  #sudo pacman -R --noconfirm archcraft-neofetch
 
   echo
   tput setaf 2
