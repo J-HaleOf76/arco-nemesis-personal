@@ -147,10 +147,9 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	echo
 	echo "Adding personal looks to /personal"
 	echo
-	sudo cp -arf ../Personal-iso/personal-iso/* /personal
+	sudo cp -arf $installed_dir/settings/personal-folder/personal-iso/* /personal
 	echo
-
-	echo
+	
 	echo "To personal Kvantum setup"
 	echo
 	[ -d $HOME"/.config/Kvantum" ] || mkdir -p $HOME"/.config/Kvantum"

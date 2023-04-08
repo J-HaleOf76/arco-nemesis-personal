@@ -56,10 +56,9 @@ else
 	tput setaf 1
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!!!!!!!!!  Nvidia-dkms has NOT been installed"
-	echo "!!!!!!!!!  Script can not continue"
+	echo "!!!!!!!!!  Know what you are doing"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	tput sgr0
-	exit 1
 
 fi
 
@@ -78,8 +77,6 @@ FIND='MODULES=""'
 REPLACE='MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"'
 sudo sed -i "s/$FIND/$REPLACE/g" /etc/mkinitcpio.conf
 
-sudo mkinitcpio -P
-
 echo
 tput setaf 2
 echo "################################################################"
@@ -89,22 +86,39 @@ echo "################################################################"
 tput sgr0
 echo
 
-FIND='GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 audit=0 nvme_load=yes"'
-REPLACE='GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 audit=0 nvme_load=yes nvidia-drm.modeset=1"'
-sudo sed -i "s/$FIND/$REPLACE/g" /etc/default/grub
+echo "options nvidia-drm modeset=1" | sudo tee  /etc/modprobe.d/nvidia-arco-hyprland.conf
 
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+# FIND="GRUB_CMDLINE_LINUX_DEFAULT='quiet loglevel=3 audit=0 nvme_load=yes'"
+# REPLACE="GRUB_CMDLINE_LINUX_DEFAULT='quiet loglevel=3 audit=0 nvme_load=yes nvidia-drm.modeset=1'"
+# sudo sed -i "s/$FIND/$REPLACE/g" /etc/default/grub
+
+# sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# echo
+# tput setaf 2
+# echo "################################################################"
+# echo "################### Removing sddm and installing sddm-git"
+# echo "################################################################"
+# tput sgr0
+# echo
+
+# we created our very own sddm release based on git code
+
+#sudo pacman -Rdd --noconfirm sddm
+#sudo pacman -S --noconfirm sddm-git
 
 echo
 tput setaf 2
 echo "################################################################"
-echo "################### Removing sddm and installing sddm-git"
+echo "################### Mkinitcpio and update-grub"
 echo "################################################################"
 tput sgr0
 echo
 
-sudo pacman -Rdd --noconfirm sddm
-sudo pacman -S --noconfirm sddm-git
+sudo mkinitcpio -P
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
 echo
 tput setaf 6
 echo "################################################################"

@@ -29,25 +29,13 @@
 
 echo
 tput setaf 3
-echo "################################################################"
+echo "######################################################"
 echo "################### Remove software for all"
-echo "################################################################"
+echo "######################################################"
 tput sgr0
 echo
 
-sudo pacman -R --noconfirm adobe-source-han-sans-cn-fonts
-sudo pacman -R --noconfirm adobe-source-han-sans-jp-fonts
-sudo pacman -R --noconfirm adobe-source-han-sans-kr-fonts
 sudo pacman -R --noconfirm archinstall
-
-# remove where ever we are
-
-sudo pacman -R --noconfirm xfce4-artwork
-
-sudo rm -rf /usr/share/backgrounds/xfce
-
-sudo pacman -Rs broadcom-wl-dkms --noconfirm
-sudo pacman -Rs rtl8821cu-morrownr-dkms-git --noconfirm
 sudo pacman -Rs xf86-video-amdgpu --noconfirm
 sudo pacman -Rs xf86-video-fbdev --noconfirm
 sudo pacman -Rs xf86-video-openchrome --noconfirm
@@ -57,6 +45,14 @@ fi
 sudo pacman -Rs xf86-video-ati --noconfirm
 sudo pacman -Rs xf86-video-nouveau --noconfirm
 sudo pacman -Rs xf86-video-vesa --noconfirm
+sudo pacman -R --noconfirm xfce4-artwork
+sudo rm -rf /usr/share/backgrounds/xfce
+sudo pacman -Rs broadcom-wl-dkms --noconfirm
+sudo pacman -Rs rtl8821cu-morrownr-dkms-git --noconfirm
+
+sudo pacman -R --noconfirm adobe-source-han-sans-cn-fonts
+sudo pacman -R --noconfirm adobe-source-han-sans-jp-fonts
+sudo pacman -R --noconfirm adobe-source-han-sans-kr-fonts
 
 # always put the current .bashrc .zshrc away
 if [ -f /etc/skel/.bashrc ]; then
@@ -72,9 +68,9 @@ if grep -q "archlinux" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for Arch"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -82,9 +78,9 @@ if grep -q "archlinux" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -96,9 +92,9 @@ if [ -f /usr/local/bin/get-nemesis-on-carli ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Removing software for Carli"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -108,9 +104,9 @@ if [ -f /usr/local/bin/get-nemesis-on-carli ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -122,9 +118,9 @@ if [ -f /usr/local/bin/get-nemesis-on-ariser ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Removing software for ARISER"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -132,9 +128,9 @@ if [ -f /usr/local/bin/get-nemesis-on-ariser ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo 
 fi
@@ -144,9 +140,9 @@ fi
 if grep -q "ArcoLinux" /etc/os-release; then
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "####### Removing software for ArcoLinux"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -154,9 +150,9 @@ if grep -q "ArcoLinux" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -168,9 +164,9 @@ if grep -q "EndeavourOS" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for EOS"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -191,9 +187,9 @@ if grep -q "EndeavourOS" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -205,9 +201,9 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for ALCI"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -241,9 +237,9 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -256,9 +252,9 @@ if grep -q "Garuda" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for Garuda"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -267,13 +263,28 @@ if grep -q "Garuda" /etc/os-release; then
   sudo pacman -R --noconfirm garuda-common-settings
   sudo pacman -R --noconfirm garuda-bash-config
   sudo pacman -R --noconfirm redshift
+  sudo pacman -Rs --noconfirm transmission-gtk
+  sudo pacman -Rs --noconfirm geary
+  sudo pacman -Rs --noconfirm celluloid
+  sudo pacman -Rs --noconfirm pitivi
+  sudo pacman -Rs --noconfirm audacity
+  sudo pacman -Rs --noconfirm xfburn
+  sudo pacman -Rs --noconfirm abiword
+  sudo pacman -Rs --noconfirm veracrypt
+  sudo pacman -Rs --noconfirm gtkhash
+  sudo pacman -Rs --noconfirm onboard
+  sudo pacman -Rs --noconfirm vim vim-runtime
+  sudo pacman -Rs --noconfirm gestures
+  sudo pacman -Rs --noconfirm pinta
   sudo pacman -Rdd --noconfirm hblock
+  sudo pacman -Rdd --noconfirm modemmanager modem-manager-gui
+  sudo pacman -Rdd --noconfirm linux-wifi-hotspot
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -286,9 +297,9 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for Sierra"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -321,9 +332,9 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -331,9 +342,9 @@ fi
 
 echo
 tput setaf 6
-echo "################################################################"
+echo "######################################################"
 echo "################### Done"
-echo "################################################################"
+echo "######################################################"
 tput sgr0
 echo
 
@@ -343,9 +354,9 @@ if grep -q "Archman" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for Archman"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
 
   sudo systemctl disable firewalld
@@ -367,9 +378,9 @@ if grep -q "Archman" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -381,9 +392,9 @@ if grep -q "archcraft" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "############### Removing software for Archcraft"
-  echo "################################################################"
+  echo "######################################################"
   tput sgr0
   echo
 
@@ -402,9 +413,32 @@ if grep -q "archcraft" /etc/os-release; then
 
   echo
   tput setaf 2
-  echo "################################################################"
+  echo "######################################################"
   echo "################### Software removed"
-  echo "################################################################"
+  echo "######################################################"
+  tput sgr0
+  echo
+
+fi
+
+# when on BigLinux - remove conflicting files
+if grep -q "BigLinux" /etc/os-release; then
+  echo
+  tput setaf 2
+  echo "######################################################"
+  echo "####### Removing software for BigLinux"
+  echo "######################################################"
+  tput sgr0
+  echo
+
+  sudo rm -r /etc/skel/.config/variety/variety.conf
+  sudo pacman -R --noconfirm big-skel
+
+  echo
+  tput setaf 2
+  echo "######################################################"
+  echo "################### Software removed"
+  echo "######################################################"
   tput sgr0
   echo
 
