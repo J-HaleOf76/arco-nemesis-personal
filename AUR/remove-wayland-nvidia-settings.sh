@@ -31,60 +31,74 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-# software from AUR (Arch User Repositories)
-# https://aur.archlinux.org/packages/
+# https://wiki.hyprland.org/Nvidia/
+# https://community.kde.org/Plasma/Wayland/Nvidia
 
 echo
 tput setaf 2
 echo "################################################################"
-echo "################### AUR from folder - Software to install"
+echo "################### Making sure nvidia-dkms is installed or else exit"
 echo "################################################################"
 tput sgr0
 echo
 
-result=$(systemd-detect-virt)
+# Just checking if nvidia-dkms is installed else stop
+if pacman -Qi nvidia-dkms &> /dev/null; then
 
-if [ $result = "none" ];then
-
-	echo
 	tput setaf 2
 	echo "################################################################"
-	echo "####### Installing VirtualBox"
+	echo "#########  Checking ..."$package" is installed... we can continue"
 	echo "################################################################"
 	tput sgr0
-	echo	
-
-	sh AUR/install-virtualbox-for-linux.sh	
 
 else
 
-
-	echo
-	tput setaf 3
-	echo "################################################################"
-	echo "### You are on a virtual machine - skipping VirtualBox"
-	echo "################################################################"
+	tput setaf 1
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo "!!!!!!!!!  Nvidia-dkms has NOT been installed"
+	echo "!!!!!!!!!  Know what you are doing"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	tput sgr0
-	echo
 
 fi
 
 echo
 tput setaf 2
 echo "################################################################"
-echo "################### Fixing KDFONTOP"
+echo "################### Removing nvidia modules for Wayland and Nvidia"
+echo "################### MODULES= nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+echo "################### in /etc/mkinitcpio.conf"
+echo "################### and rebuilding /boot files"
 echo "################################################################"
 tput sgr0
 echo
 
-sh AUR/add-setfont-binaries.sh
+FIND='MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"'
+REPLACE='MODULES=""'
+sudo sed -i "s/$FIND/$REPLACE/g" /etc/mkinitcpio.conf
 
-# these come last always
-echo "Checking if icons from applications have a hardcoded path"
-echo "and fixing them"
-echo "Wait for it ..."
+echo
+tput setaf 2
+echo "################################################################"
+echo "################### Removing option nvidia-drm.modeset=1"
+echo "################### to the kernel"
+echo "################################################################"
+tput sgr0
+echo
 
-sudo hardcode-fixer
+sudo rm  /etc/modprobe.d/nvidia-wayland-nemesis.conf
+
+echo
+tput setaf 2
+echo "################################################################"
+echo "################### Mkinitcpio and update-grub"
+echo "################################################################"
+tput sgr0
+echo
+
+sudo mkinitcpio -P
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo
 tput setaf 6

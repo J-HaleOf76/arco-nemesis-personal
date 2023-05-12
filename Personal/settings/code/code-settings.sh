@@ -31,60 +31,30 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-# software from AUR (Arch User Repositories)
-# https://aur.archlinux.org/packages/
-
 echo
 tput setaf 2
 echo "################################################################"
-echo "################### AUR from folder - Software to install"
+echo "################### Code settings"
 echo "################################################################"
 tput sgr0
 echo
 
-result=$(systemd-detect-virt)
-
-if [ $result = "none" ];then
-
-	echo
-	tput setaf 2
-	echo "################################################################"
-	echo "####### Installing VirtualBox"
-	echo "################################################################"
-	tput sgr0
-	echo	
-
-	sh AUR/install-virtualbox-for-linux.sh	
-
-else
+sudo pacman -S --noconfirm --needed python-black
+sudo pacman -S --noconfirm --needed python-pylint
 
 
-	echo
-	tput setaf 3
-	echo "################################################################"
-	echo "### You are on a virtual machine - skipping VirtualBox"
-	echo "################################################################"
-	tput sgr0
-	echo
-
-fi
+echo "Install the following extensions and theme"
+echo "isort"
+echo "python"
+echo "atom one dark theme"
+echo "material icon theme of material theme icons"
+echo
+echo "Change the following settings"
+echo "Go to  File, Preferences,settings"
+echo "change to black"
 
 echo
-tput setaf 2
-echo "################################################################"
-echo "################### Fixing KDFONTOP"
-echo "################################################################"
-tput sgr0
-echo
-
-sh AUR/add-setfont-binaries.sh
-
-# these come last always
-echo "Checking if icons from applications have a hardcoded path"
-echo "and fixing them"
-echo "Wait for it ..."
-
-sudo hardcode-fixer
+echo "pylint not enabled"
 
 echo
 tput setaf 6

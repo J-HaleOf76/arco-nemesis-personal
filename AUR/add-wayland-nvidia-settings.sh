@@ -88,25 +88,6 @@ echo
 
 echo "options nvidia-drm modeset=1" | sudo tee  /etc/modprobe.d/nvidia-wayland-nemesis.conf
 
-# FIND="GRUB_CMDLINE_LINUX_DEFAULT='quiet loglevel=3 audit=0 nvme_load=yes'"
-# REPLACE="GRUB_CMDLINE_LINUX_DEFAULT='quiet loglevel=3 audit=0 nvme_load=yes nvidia-drm.modeset=1'"
-# sudo sed -i "s/$FIND/$REPLACE/g" /etc/default/grub
-
-# sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-# echo
-# tput setaf 2
-# echo "################################################################"
-# echo "################### Removing sddm and installing sddm-git"
-# echo "################################################################"
-# tput sgr0
-# echo
-
-# we created our very own sddm release based on git code
-
-#sudo pacman -Rdd --noconfirm sddm
-#sudo pacman -S --noconfirm sddm-git
-
 echo
 tput setaf 2
 echo "################################################################"
