@@ -31,41 +31,24 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-if grep -q "Archman" /etc/os-release; then
+if grep -q "RebornOS" /etc/os-release; then
 
 	echo
 	tput setaf 2
 	echo "################################################################"
-	echo "################### We are on ARCHMAN"
+	echo "################### We are on RebornOS"
 	echo "################################################################"
 	tput sgr0
 	echo
 
-	echo "Removing conflicting folders"
-	sudo rm /etc/skel/.zshrc
-	sudo rm -r /etc/skel/.config/Thunar
-	
-	echo
-	echo "Installing edu packages"
-	sudo pacman -S --noconfirm --needed edu-skel-git
-  	sudo pacman -S --noconfirm --needed edu-xfce-git
-  	sudo pacman -S --noconfirm --needed edu-system-git
-
 	echo
 	echo "Pacman parallel downloads	"
-	FIND="#ParallelDownloads = 5"
-	REPLACE="ParallelDownloads = 5"
+	FIND="ParallelDownloads = 16"
+	REPLACE="ParallelDownloads = 20"
 	sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
 
-	echo
-	echo "Bootloader time to 1 second"
-	if [ -f /boot/loader/loader.conf ]; then
-		FIND="timeout 5"
-		REPLACE="timeout 1"
-		sudo sed -i "s/$FIND/$REPLACE/g" /boot/loader/loader.conf
-
-	fi
-	echo
+	echo "Variety conf ArcoLinux"
+	sudo pacman -S --noconfirm --needed arcolinux-variety-git
 
 	echo
 	echo "Adding nanorc"
@@ -84,24 +67,8 @@ if grep -q "Archman" /etc/os-release; then
 		tput sgr0
 		echo
 
-		cp -arf /etc/skel/. ~
-		cp -arf /etc/skel/.config ~
-
-		echo
-		echo "Changing the whiskermenu"
-		echo
-		cp $installed_dir/settings/archlinux/whiskermenu-7.rc ~/.config/xfce4/panel/whiskermenu-7.rc
-		sudo cp $installed_dir/settings/archlinux/whiskermenu-7.rc /etc/skel/.config/xfce4/panel/whiskermenu-7.rc
-
-		FIND="Arc-Dark"
-		REPLACE="Arc-Dawn-Dark"
-		sed -i "s/$FIND/$REPLACE/g" ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-		sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-
-		FIND="Sardi-Arc"
-		REPLACE="a-candy-beauty-icon-theme"
-		sed -i "s/$FIND/$REPLACE/g" ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-		sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+		echo "Changing theme and icon theme"
+		cp $installed_dir/settings/rebornos/xfce/xsettings.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
 	fi
 

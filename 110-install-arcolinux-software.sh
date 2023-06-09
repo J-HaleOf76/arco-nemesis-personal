@@ -60,9 +60,10 @@ if grep -q arcolinux_repo /etc/pacman.conf; then
   sudo pacman -Sy
 fi
 
-sudo pacman -S --noconfirm --needed arcolinux-candy-beauty-git
+sudo pacman -S --noconfirm --needed a-candy-beauty-icon-theme-git
 
 sudo pacman -S --noconfirm --needed arcolinux-arc-dawn-git
+sudo pacman -S --noconfirm --needed arcolinux-app-glade-git
 
 sudo pacman -S --noconfirm --needed arcolinux-hblock-git
 sudo pacman -S --noconfirm --needed arcolinux-pamac-all

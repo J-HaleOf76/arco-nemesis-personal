@@ -37,6 +37,8 @@ echo
 
 sudo pacman -R --noconfirm archinstall
 sudo pacman -Rs pragha --noconfirm
+sudo pacman -Rs lftp --noconfirm
+sudo pacman -Rs lshw --noconfirm
 sudo pacman -Rs xf86-video-amdgpu --noconfirm
 sudo pacman -Rs xf86-video-fbdev --noconfirm
 sudo pacman -Rs xf86-video-openchrome --noconfirm
@@ -434,6 +436,29 @@ if grep -q "BigLinux" /etc/os-release; then
 
   sudo rm -r /etc/skel/.config/variety/variety.conf
   sudo pacman -R --noconfirm big-skel
+
+  echo
+  tput setaf 2
+  echo "######################################################"
+  echo "################### Software removed"
+  echo "######################################################"
+  tput sgr0
+  echo
+
+fi
+
+# when on BigLinux - remove conflicting files
+if grep -q "RebornOS" /etc/os-release; then
+  echo
+  tput setaf 2
+  echo "######################################################"
+  echo "####### Removing software for RebornOS"
+  echo "######################################################"
+  tput sgr0
+  echo
+
+  sudo rm -r /etc/skel/.config/variety/variety.conf
+  sudo pacman -Rs parole --noconfirm
 
   echo
   tput setaf 2

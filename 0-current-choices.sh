@@ -32,6 +32,22 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 ##################################################################################################################
 
 echo
+tput setaf 3
+echo "################################################################"
+echo "Do you want to install Chadwm on your system?"
+echo "Answer with Y/y or N/n"
+echo "################################################################"
+tput sgr0
+echo
+
+read response
+
+if [[ "$response" == [yY] ]]; then
+    touch /tmp/install-chadwm
+fi
+
+
+echo
 echo "Pacman parallel downloads if needed -for ArcoLinux"
 FIND="ParallelDownloads = 8"
 REPLACE="ParallelDownloads = 20"
@@ -102,6 +118,7 @@ sh 970-eos*
 sh 970-garuda*
 sh 970-sierra*
 sh 970-biglinux*
+sh 970-rebornos*
 
 #has to be last - they are all Arch
 sh 970-arch.sh
