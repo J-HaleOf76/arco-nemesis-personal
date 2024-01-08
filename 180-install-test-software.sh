@@ -31,60 +31,37 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-# software from AUR (Arch User Repositories)
-# https://aur.archlinux.org/packages/
-
 echo
-tput setaf 2
+tput setaf 3
 echo "################################################################"
-echo "################### AUR from folder - Software to install"
+echo "################### TEST SOFTWARE"
 echo "################################################################"
 tput sgr0
 echo
 
-result=$(systemd-detect-virt)
+func_install() {
+    if pacman -Qi $1 &> /dev/null; then
+        tput setaf 2
+        echo "###############################################################################"
+        echo "################## The package "$1" is already installed"
+        echo "###############################################################################"
+        echo
+        tput sgr0
+    else
+        tput setaf 3
+        echo "###############################################################################"
+        echo "##################  Installing package "  $1
+        echo "###############################################################################"
+        echo
+        tput sgr0
+        sudo pacman -S --noconfirm --needed $1
+    fi
+}
 
-if [ $result = "none" ];then
 
-	echo
-	tput setaf 2
-	echo "################################################################"
-	echo "####### Installing VirtualBox"
-	echo "################################################################"
-	tput sgr0
-	echo	
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
-	sh AUR/install-virtualbox-for-linux.sh	
-
-else
-
-
-	echo
-	tput setaf 3
-	echo "################################################################"
-	echo "### You are on a virtual machine - skipping VirtualBox"
-	echo "################################################################"
-	tput sgr0
-	echo
-
-fi
-
-# echo
-# tput setaf 2
-# echo "################################################################"
-# echo "################### Fixing KDFONTOP"
-# echo "################################################################"
-# tput sgr0
-# echo
-
-# sh AUR/add-setfont-binaries.sh
-
-# these come last always
-echo "Checking if icons from applications have a hardcoded path"
-echo "and fixing them"
-echo "Wait for it ..."
-
-sudo hardcode-fixer
+yes | sudo pacman -S --needed libadwaita-without-adwaita-git
 
 echo
 tput setaf 6

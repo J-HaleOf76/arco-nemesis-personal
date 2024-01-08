@@ -27,19 +27,31 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
-sudo pacman -S --noconfirm --needed btrfs-assistant
-sudo pacman -S --noconfirm --needed grub-btrfs
-sudo pacman -S --noconfirm --needed snap-pac-git
-sudo pacman -S --noconfirm --needed snapper
-sudo pacman -S --noconfirm --needed snapper-tools-git
-sudo pacman -S --noconfirm --needed snapper-support
+##################################################################################################################
 
-sudo snapper -c root create-config /
+echo
+tput setaf 2
+echo "################################################################"
+echo "################### Installing all EDU icons"
+echo "################################################################"
+tput sgr0
+echo
 
-echo "first manual snapshot"
+sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-git
+sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-mint-grey-git
+sudo pacman -S --noconfirm --needed edu-candy-beauty-arc-mint-red-git
+sudo pacman -S --noconfirm --needed edu-candy-beauty-qogir-git
+sudo pacman -S --noconfirm --needed edu-candy-beauty-tela-git
+sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-git
+sudo pacman -S --noconfirm --needed edu-papirus-dark-tela-grey-git
+sudo pacman -S --noconfirm --needed edu-vimix-dark-tela-git
 
-snapper -c root create --description "initial snapshot"
-
-sudo chmod a+rx /.snapshots
-sudo chown :users /.snapshots
+echo
+tput setaf 2
+echo "################################################################"
+echo "################### Done"
+echo "################################################################"
+tput sgr0
+echo

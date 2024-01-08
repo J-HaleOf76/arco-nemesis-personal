@@ -62,6 +62,7 @@ echo
 [ -d $HOME"/.config/gtk-4.0" ] || mkdir -p $HOME"/.config/gtk-4.0"
 [ -d $HOME"/.config/variety" ] || mkdir -p $HOME"/.config/variety"
 [ -d $HOME"/.config/fish" ] || mkdir -p $HOME"/.config/fish"
+[ -d $HOME"/.config/obs-studio" ] || mkdir -p $HOME"/.config/obs-studio"
 [ -d $HOME"/.config/neofetch" ] || mkdir -p $HOME"/.config/neofetch"
 [ -d $HOME"/DATA" ] || mkdir -p $HOME"/DATA"
 [ -d $HOME"/Insync" ] || mkdir -p $HOME"/Insync"
@@ -149,6 +150,10 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	echo
 	sudo cp -arf $installed_dir/settings/personal-folder/personal-iso/* /personal
 	echo
+	echo "Adding obs-studio settings"
+	echo
+	sudo cp -arf $installed_dir/settings/obs-studio/* ~/.config/obs-studio/
+	echo
 	
 	echo "To personal Kvantum setup"
 	echo
@@ -190,6 +195,14 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	cp $installed_dir/settings/variety/variety.conf ~/.config/variety/
 	[ -d /etc/skel/.config/variety ] || sudo mkdir -p /etc/skel/.config/variety
 	sudo cp $installed_dir/settings/variety/variety.conf /etc/skel/.config/variety/
+	echo
+
+	echo
+	echo "Installing personal settings of variety scripts"
+	[ -d $HOME"/.config/variety/scripts" ] || mkdir -p $HOME"/.config/variety/scripts"
+	cp $installed_dir/settings/variety/scripts/* ~/.config/variety/scripts/
+	[ -d /etc/skel/.config/variety/scripts ] || sudo mkdir -p /etc/skel/.config/variety/scripts
+	sudo cp $installed_dir/settings/variety/scripts/* /etc/skel/.config/variety/scripts/
 	echo
 fi
 

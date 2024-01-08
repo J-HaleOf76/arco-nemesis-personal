@@ -78,6 +78,7 @@ sudo pacman -S --noconfirm --needed baobab
 sudo pacman -S --noconfirm --needed bash-completion
 sudo pacman -S --noconfirm --needed bat
 sudo pacman -S --noconfirm --needed bibata-cursor-theme-bin
+sudo pacman -S --noconfirm --needed btop
 sudo pacman -S --noconfirm --needed catfish
 sudo pacman -S --noconfirm --needed chromium
 sudo pacman -S --noconfirm --needed cpuid
@@ -115,7 +116,8 @@ sudo pacman -S --noconfirm --needed htop
 sudo pacman -S --noconfirm --needed hw-probe
 sudo pacman -S --noconfirm --needed inkscape
 sudo pacman -S --noconfirm --needed insync
-sudo pacman -S --noconfirm --needed kvantum
+sudo pacman -S --noconfirm --needed kvantum-qt5-git
+sudo pacman -S --noconfirm --needed kvantum-qt6-git
 sudo pacman -S --noconfirm --needed linux-firmware-qlogic
 sudo pacman -S --noconfirm --needed lastpass
 sudo pacman -S --noconfirm --needed logrotate
@@ -132,13 +134,14 @@ sudo pacman -S --noconfirm --needed neofetch
 sudo pacman -S --noconfirm --needed network-manager-applet
 sudo pacman -S --noconfirm --needed networkmanager-openvpn
 sudo pacman -S --noconfirm --needed nitrogen
-sudo pacman -S --noconfirm --needed nomacs
+sudo pacman -S --noconfirm --needed nomacs-qt6-git
 sudo pacman -S --noconfirm --needed noto-fonts
 sudo pacman -S --noconfirm --needed ntp
 sudo pacman -S --noconfirm --needed nss-mdns
 sudo pacman -S --noconfirm --needed numlockx
 sudo pacman -S --noconfirm --needed oh-my-zsh-git
 sudo pacman -S --noconfirm --needed openresolv
+sudo pacman -S --noconfirm --needed pamac-aur
 sudo pacman -S --noconfirm --needed paru-bin
 sudo pacman -S --noconfirm --needed pavucontrol
 sudo pacman -S --noconfirm --needed playerctl

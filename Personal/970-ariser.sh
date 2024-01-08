@@ -43,6 +43,18 @@ if [ -f /usr/local/bin/get-nemesis-on-ariser ]; then
 	tput sgr0
 	echo
 
+	if [ -f /etc/pacman.d/hooks/kernel-linux.hook ]; then
+	    
+		if [ -f /boot/efi/EFI/systemd/systemd-bootx64.efi ]; then
+	    	sudo rm -v /etc/pacman.d/hooks/kernel-linux.hook
+	    fi
+
+		if [ -f /boot/EFI/systemd/systemd-bootx64.efi ]; then
+	    	sudo rm -v /etc/pacman.d/hooks/kernel-linux.hook
+	    fi
+	    
+	fi
+	
 	echo
 	tput setaf 2
 	echo "################################################################"
@@ -190,6 +202,26 @@ if [ -f /usr/local/bin/get-nemesis-on-ariser ]; then
 	cp  $installed_dir/settings/archlinux-logout/archlinux-logout-beauty.conf $HOME/.config/archlinux-logout/archlinux-logout.conf
 	sudo cp  $installed_dir/settings/archlinux-logout/archlinux-logout-beauty.conf /etc/archlinux-logout.conf
 	echo
+
+	echo
+	tput setaf 6
+	echo "################################################################"
+	echo "################### Remove /etc/pacman.d/hooks/kernel-linux.hook"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+	if [ -f /etc/pacman.d/hooks/kernel-linux.hook ]; then
+	    
+		if [ -f /boot/efi/EFI/systemd/systemd-bootx64.efi ]; then
+	    	sudo rm -v /etc/pacman.d/hooks/kernel-linux.hook
+	    fi
+
+		if [ -f /boot/EFI/systemd/systemd-bootx64.efi ]; then
+	    	sudo rm -v /etc/pacman.d/hooks/kernel-linux.hook
+	    fi
+	    sudo pacman -S --noconfirm --needed kernel-install-mkinitcpio
+	fi
 
 	tput setaf 6
 	echo "################################################################"

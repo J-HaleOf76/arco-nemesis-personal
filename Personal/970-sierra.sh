@@ -44,6 +44,15 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 	echo
 
 	echo
+	tput setaf 2
+	echo "################################################################"
+	echo "################### Removing conflicting files"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+	sudo rm -f /etc/skel/.config/variety/variety.conf
+	echo
 	echo "Installing edu packages"
 	sudo pacman -S --noconfirm  edu-skel-git
   	sudo pacman -S --noconfirm  edu-xfce-git
@@ -187,6 +196,27 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 	cd $HOME/.config/arco-chadwm/chadwm/
 	make
 	sudo make install
+
+	echo
+	tput setaf 6
+	echo "################################################################"
+	echo "################### Remove /etc/pacman.d/hooks/kernel-linux.hook"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+	if [ -f /etc/pacman.d/hooks/kernel-linux.hook ]; then
+	    
+		if [ -f /boot/efi/EFI/systemd/systemd-bootx64.efi ]; then
+	    	sudo rm -v /etc/pacman.d/hooks/kernel-linux.hook
+	    fi
+
+		if [ -f /boot/EFI/systemd/systemd-bootx64.efi ]; then
+	    	sudo rm -v /etc/pacman.d/hooks/kernel-linux.hook
+	    fi
+	    sudo pacman -S --noconfirm --needed kernel-install-mkinitcpio
+	    
+	fi
 
 	echo
 	echo

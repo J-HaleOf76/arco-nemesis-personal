@@ -38,7 +38,6 @@ echo
 sudo pacman -R --noconfirm archinstall
 sudo pacman -Rs pragha --noconfirm
 sudo pacman -Rs lftp --noconfirm
-sudo pacman -Rs lshw --noconfirm
 sudo pacman -Rs xf86-video-amdgpu --noconfirm
 sudo pacman -Rs xf86-video-fbdev --noconfirm
 sudo pacman -Rs xf86-video-openchrome --noconfirm
@@ -177,7 +176,7 @@ if grep -q "EndeavourOS" /etc/os-release; then
   sudo pacman -R --noconfirm firewalld
 
   sudo pacman -R --noconfirm arc-gtk-theme-eos
-  sudo pacman -Rdd --noconfirm endeavouros-skel-default endeavouros-skel-xfce4
+  sudo pacman -Rdd --noconfirm eos-settings-xfce4
   #sudo pacman -Rdd --noconfirm modemmanager modemmanager-qt
   sudo pacman -R --noconfirm yay
 
@@ -186,7 +185,7 @@ if grep -q "EndeavourOS" /etc/os-release; then
   # sudo rm -r /etc/skel/.config/variety
   # sudo rm -r /etc/skel/.config/Thunar
   # sudo rm -r /etc/skel/.config/xfce4
-  # sudo rm -r /etc/skel/.zshrc
+  sudo rm /etc/skel/.config/xfce4/panel/whiskermenu-7.rc
 
   echo
   tput setaf 2

@@ -31,21 +31,24 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-echo
-tput setaf 3
-echo "################################################################"
-echo "Do you want to install Chadwm on your system?"
-echo "Answer with Y/y or N/n"
-echo "################################################################"
-tput sgr0
-echo
+if [ ! -d /usr/share/wayland-sessions/ ]; then
 
-read response
+    echo
+    tput setaf 3
+    echo "################################################################"
+    echo "Do you want to install Chadwm on your system?"
+    echo "Answer with Y/y or N/n"
+    echo "################################################################"
+    tput sgr0
+    echo
 
-if [[ "$response" == [yY] ]]; then
-    touch /tmp/install-chadwm
+    read response
+
+    if [[ "$response" == [yY] ]]; then
+        touch /tmp/install-chadwm
+    fi
+
 fi
-
 
 echo
 echo "Pacman parallel downloads if needed -for ArcoLinux"
@@ -56,6 +59,12 @@ sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
 echo
 echo "Pacman parallel downloads if needed - for Arch Linux"
 FIND="#ParallelDownloads = 5"
+REPLACE="ParallelDownloads = 20"
+sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
+
+echo
+echo "Pacman parallel downloads if needed - for EOS"
+FIND="ParallelDownloads = 5"
 REPLACE="ParallelDownloads = 20"
 sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
 
@@ -78,13 +87,12 @@ sh 120-install-core-software*
 sh 150-install-chadwm*
 sh 160-install-bluetooth*
 sh 170-install-cups*
+sh 180-install-test-software*
 
 sh 200-software-AUR-repo*
 #sh 300-sardi-extra-icons-AUR-repo*
 #sh 310-sardi-mint-y-icons-AUR-repo*
 #sh 320-surfn-mint-y-icons-git-AUR-repo*
-
-sh 500-what*
 
 echo
 tput setaf 3
@@ -123,8 +131,9 @@ sh 970-rebornos*
 #has to be last - they are all Arch
 sh 970-arch.sh
 
+sh 998-skel*
 
-sh 999-skel*
+sh 999-what*
 
 tput setaf 3
 echo "################################################################"

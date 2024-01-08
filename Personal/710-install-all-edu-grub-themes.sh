@@ -31,63 +31,28 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-# software from AUR (Arch User Repositories)
-# https://aur.archlinux.org/packages/
-
 echo
 tput setaf 2
 echo "################################################################"
-echo "################### AUR from folder - Software to install"
+echo "################### Installing all EDU icons"
 echo "################################################################"
 tput sgr0
 echo
 
-result=$(systemd-detect-virt)
-
-if [ $result = "none" ];then
-
-	echo
-	tput setaf 2
-	echo "################################################################"
-	echo "####### Installing VirtualBox"
-	echo "################################################################"
-	tput sgr0
-	echo	
-
-	sh AUR/install-virtualbox-for-linux.sh	
-
-else
-
-
-	echo
-	tput setaf 3
-	echo "################################################################"
-	echo "### You are on a virtual machine - skipping VirtualBox"
-	echo "################################################################"
-	tput sgr0
-	echo
-
-fi
-
-# echo
-# tput setaf 2
-# echo "################################################################"
-# echo "################### Fixing KDFONTOP"
-# echo "################################################################"
-# tput sgr0
-# echo
-
-# sh AUR/add-setfont-binaries.sh
-
-# these come last always
-echo "Checking if icons from applications have a hardcoded path"
-echo "and fixing them"
-echo "Wait for it ..."
-
-sudo hardcode-fixer
+sudo pacman -S --noconfirm --needed edu-alci-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-arcolinux-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-ariser-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-asus-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-bao-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-chadwm-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-evi-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-radar-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-radar-mono-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-ubuntu-grub-theme-git
+sudo pacman -S --noconfirm --needed edu-vimix-mono-grub-theme-git
 
 echo
-tput setaf 6
+tput setaf 2
 echo "################################################################"
 echo "################### Done"
 echo "################################################################"
