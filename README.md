@@ -1,3 +1,15 @@
+<h1 align="center">
+ <img src="https://github.com/erikdubois/arcolinux-nemesis/blob/master/Personal/settings/arcolinux.png">
+  <br />
+   ArcoLinux Nemesis
+</h1>
+
+<a href="https://github.com/erikdubois?tab=followers">
+         <img alt="followers" title="Follow for Updates" src="https://custom-icon-badges.demolab.com/github/followers/erikdubois?color=236ad3&labelColor=1155ba&style=for-the-badge&logo=person-add&label=Follow&logoColor=white"/></a> 
+
+![Maintenance](https://img.shields.io/maintenance/yes/2024?style=for-the-badge)
+![Last-Commit](https://img.shields.io/github/last-commit/erikdubois/arcolinux-nemesis?style=for-the-badge)
+
 # ArcoLinux Nemesis
 ## This is for my Arcolinux system.
 I need to change this to fit my arco needs.
@@ -15,13 +27,13 @@ Learn, have fun and enjoy.
 
 Information : https://arcolinux.info
 
-Tutorials about ArcoLinux iso (Xfce, Openbox and i3) : https://arcolinux.com
+Tutorials about ArcoLinux iso (Any linux topic) : https://arcolinux.com
 
 Tutorials about ArcoLinuxD iso (any desktop) : https://arcolinuxd.com
 
-Tutorials about ArcoLinuxB iso (any desktop) : https://arcolinuxb.com
+Tutorials about ArcoLinuxB iso (Build your own iso) : https://arcolinuxb.com
 
-Tutorials about Carli project (any desktop) : https://arcolinuxiso.com
+Tutorials about Carli project (Create your own distro) : https://arcolinuxiso.com
 
 Forum : https://arcolinuxforum.com
 
