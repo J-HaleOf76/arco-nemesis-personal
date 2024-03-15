@@ -31,6 +31,47 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### Intervention first"
+echo "################################################################"
+tput sgr0
+echo
+
+sh 410-intervention*
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### Intervention done"
+echo "################################################################"
+tput sgr0
+echo
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### Installing velo/velow - development software"
+echo "################################################################"
+tput sgr0
+echo
+
+# when NOT on a wayland session
+if [ ! -d /usr/share/wayland-sessions/ ]; then
+    if [ -f /usr/local/bin/velo ]; then
+        velo
+    fi
+fi
+
+# when on a wayland session
+if [ -d /usr/share/wayland-sessions/ ]; then
+    if [ -f /usr/local/bin/velow ]; then
+        velow
+    fi
+fi
+
+
 if [ ! -d /usr/share/wayland-sessions/ ]; then
 
     echo
@@ -51,22 +92,34 @@ if [ ! -d /usr/share/wayland-sessions/ ]; then
 fi
 
 echo
-echo "Pacman parallel downloads if needed -for ArcoLinux"
+tput setaf 3
+echo "################################################################"
+echo "################### Pacman parallel downloads to 20"
+echo "################################################################"
+tput sgr0
+echo
+
 FIND="ParallelDownloads = 8"
 REPLACE="ParallelDownloads = 20"
 sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
 
-echo
-echo "Pacman parallel downloads if needed - for Arch Linux"
 FIND="#ParallelDownloads = 5"
 REPLACE="ParallelDownloads = 20"
 sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
 
-echo
-echo "Pacman parallel downloads if needed - for EOS"
 FIND="ParallelDownloads = 5"
 REPLACE="ParallelDownloads = 20"
 sudo sed -i "s/$FIND/$REPLACE/g" /etc/pacman.conf
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### No neofetch by default"
+echo "################################################################"
+tput sgr0
+echo
+
+sed -i 's/^neofetch/#neofetch/' ~/.bashrc
 
 echo
 tput setaf 3
@@ -83,16 +136,13 @@ sh 400-remove-software*
 sh 100-install-nemesis-software*
 sh 110-install-arcolinux-software*
 sh 120-install-core-software*
-#sh 130-install-leftwm*
 sh 150-install-chadwm*
 sh 160-install-bluetooth*
 sh 170-install-cups*
 sh 180-install-test-software*
 
 sh 200-software-AUR-repo*
-#sh 300-sardi-extra-icons-AUR-repo*
-#sh 310-sardi-mint-y-icons-AUR-repo*
-#sh 320-surfn-mint-y-icons-git-AUR-repo*
+sh 500-*
 
 echo
 tput setaf 3
@@ -114,6 +164,8 @@ sh 950-*
 
 sh 960-*
 
+sh 969-skel*
+
 sh 970-all*
 
 sh 970-alci*
@@ -127,11 +179,10 @@ sh 970-garuda*
 sh 970-sierra*
 sh 970-biglinux*
 sh 970-rebornos*
+sh 970-archbang*
 
 #has to be last - they are all Arch
 sh 970-arch.sh
-
-sh 998-skel*
 
 sh 999-what*
 

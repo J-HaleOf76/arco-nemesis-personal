@@ -65,6 +65,7 @@ func_install_chadwm() {
     archlinux-logout-git
     arcolinux-chadwm-git
     arcolinux-paleofetch-git
+    arcolinux-powermenu-git
     arcolinux-wallpapers-candy-git
     arcolinux-wallpapers-git
     autorandr
@@ -75,11 +76,11 @@ func_install_chadwm() {
     gvfs
     lolcat
     lxappearance
-    pa-applet-git
+    #pa-applet-git
     picom
     polkit-gnome
     rofi
-    rxvt-unicode
+    #rxvt-unicode
     sxhkd
     thunar
     thunar-archive-plugin
@@ -118,3 +119,11 @@ if [ -f /tmp/install-chadwm ]; then
 
     func_install_chadwm
 fi
+
+echo
+tput setaf 6
+echo "################################################################"
+echo "################### Done"
+echo "################################################################"
+tput sgr0
+echo

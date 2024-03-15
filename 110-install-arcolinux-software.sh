@@ -61,34 +61,47 @@ if grep -q arcolinux_repo /etc/pacman.conf; then
 fi
 
 sudo pacman -S --noconfirm --needed a-candy-beauty-icon-theme-git
-
-sudo pacman -S --noconfirm --needed arcolinux-arc-dawn-git
 sudo pacman -S --noconfirm --needed arcolinux-app-glade-git
-
 sudo pacman -S --noconfirm --needed arcolinux-hblock-git
 sudo pacman -S --noconfirm --needed archlinux-tweak-tool-git
 sudo pacman -S --noconfirm --needed arcolinux-wallpapers-git
 
-if [ ! -f /usr/bin/startplasma-x11 ]; then
+if [ ! -f /usr/share/wayland-sessions/plasma.desktop ]; then
   sudo pacman -S --noconfirm --needed archlinux-logout-git
+  sudo pacman -S --noconfirm --needed arcolinux-arc-dawn-git
 fi
 
 ###############################################################################
 
-# when on Plasma
+# when on Plasma X11
 
 if [ -f /usr/bin/startplasma-x11 ]; then
 
   echo
   tput setaf 2
   echo "################################################################"
-  echo "################### Plasma related applications"
+  echo "################### Plasma X11 related applications"
   echo "################################################################"
   tput sgr0
   echo
 
-  sudo pacman -S --noconfirm --needed arcolinux-plasma-arc-dark-candy-git
-  sudo pacman -S --noconfirm --needed arcolinux-plasma-nordic-darker-candy-git
+  #sudo pacman -S --noconfirm --needed arcolinux-plasma-arc-dark-candy-git
+  #sudo pacman -S --noconfirm --needed arcolinux-plasma-nordic-darker-candy-git
+  #sudo pacman -S --noconfirm --needed surfn-plasma-dark-icons-git
+  #sudo pacman -S --noconfirm --needed surfn-plasma-light-icons-git
+fi
+
+# when on Plasma Wayland
+
+if [ -f /usr/share/wayland-sessions/plasma.desktop ]; then
+
+  echo
+  tput setaf 2
+  echo "################################################################"
+  echo "################### Plasma wayland related applications"
+  echo "################################################################"
+  tput sgr0
+  echo
   sudo pacman -S --noconfirm --needed surfn-plasma-dark-icons-git
   sudo pacman -S --noconfirm --needed surfn-plasma-light-icons-git
 fi
@@ -107,15 +120,6 @@ if [ -f /usr/share/xsessions/xfce.desktop ]; then
   sudo pacman -S --noconfirm --needed arcolinux-arc-kde
 
 fi
-
-echo
-tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
-tput sgr0
-echo
-
 
 if [ -f /usr/share/xsessions/cinnamon.desktop ]; then
 
@@ -137,3 +141,11 @@ if [ -f /usr/share/xsessions/cinnamon.desktop ]; then
   sudo pacman -S --noconfirm --needed xed
 
 fi
+
+echo
+tput setaf 6
+echo "################################################################"
+echo "################### Done"
+echo "################################################################"
+tput sgr0
+echo
