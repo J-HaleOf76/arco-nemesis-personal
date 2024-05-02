@@ -25,11 +25,33 @@
 #tput setaf 6 = cyan
 #tput setaf 7 = gray
 #tput setaf 8 = light blue
+
+#end colors
+#tput sgr0
 ##################################################################################################################
 
+#networkmanager issue
+#nmcli connection modify Wired\ connection\ 1 ipv6.method "disabled"
+
+# what is the present working directory
 installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "Do you want to install Chadwm on your system?"
+echo "Answer with Y/y or N/n"
+echo "################################################################"
+tput sgr0
+echo
+
+read response
+
+if [[ "$response" == [yY] ]]; then
+    touch /tmp/install-chadwm
+fi
 
 echo
 tput setaf 3
@@ -71,26 +93,6 @@ if [ -d /usr/share/wayland-sessions/ ]; then
     fi
 fi
 
-
-if [ ! -d /usr/share/wayland-sessions/ ]; then
-
-    echo
-    tput setaf 3
-    echo "################################################################"
-    echo "Do you want to install Chadwm on your system?"
-    echo "Answer with Y/y or N/n"
-    echo "################################################################"
-    tput sgr0
-    echo
-
-    read response
-
-    if [[ "$response" == [yY] ]]; then
-        touch /tmp/install-chadwm
-    fi
-
-fi
-
 echo
 tput setaf 3
 echo "################################################################"
@@ -130,6 +132,11 @@ tput sgr0
 echo
 
 sudo pacman -Sy
+
+if grep -q "arconet" /etc/dev-rel || grep -q "arcopro" /etc/dev-rel || grep -q "arcoplasma" /etc/dev-rel; then
+    sh get-me-started
+fi
+
 
 sh 400-remove-software*
 

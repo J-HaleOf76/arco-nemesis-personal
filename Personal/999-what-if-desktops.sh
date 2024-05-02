@@ -71,7 +71,6 @@ if [[ -f $hyprland || -f $wayfire || -f $sway ]]; then
 
   sudo pacman -S --noconfirm --needed arcolinux-wayland-app-hooks-git
   sudo pacman -S --noconfirm --needed obs-studio
-  sudo pacman -S --noconfirm --needed wlrobs
   sudo pacman -S --noconfirm --needed spotify-wayland
 
 fi
@@ -101,12 +100,6 @@ if [ -f /usr/share/wayland-sessions/wayfire.desktop ]; then
   echo
 
   give-me-azerty-be-wayfire
-
-  echo "Installing bashrc-personal with wal files"
-  echo
-  cp $installed_dir/settings/shell-personal/.bashrc-personal-wal ~/.bashrc-personal
-  sudo cp -f $installed_dir/settings/shell-personal/.bashrc-personal-wal /etc/skel/.bashrc-personal
-  echo
 
 fi
 
