@@ -31,6 +31,18 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 func_install() {
     if pacman -Qi $1 &> /dev/null; then
         tput setaf 2
@@ -64,7 +76,7 @@ func_install_chadwm() {
     alacritty
     archlinux-logout-git
     arcolinux-chadwm-git
-    arcolinux-paleofetch-git
+    arcolinux-chadwm-pacman-hook-git
     arcolinux-powermenu-git
     arcolinux-wallpapers-candy-git
     arcolinux-wallpapers-git
@@ -76,11 +88,9 @@ func_install_chadwm() {
     gvfs
     lolcat
     lxappearance
-    #pa-applet-git
     picom
     polkit-gnome
-    rofi
-    #rxvt-unicode
+    rofi-lbonn-wayland
     sxhkd
     thunar
     thunar-archive-plugin
@@ -122,8 +132,8 @@ fi
 
 echo
 tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
 tput sgr0
 echo

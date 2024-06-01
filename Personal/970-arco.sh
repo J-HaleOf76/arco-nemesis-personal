@@ -31,6 +31,18 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 if grep -q "ArcoLinux" /etc/os-release; then
 
 	echo
@@ -40,39 +52,6 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	echo "################################################################"
 	tput sgr0
 	echo
-
-	echo
-	echo "Change gtk-3.0 config"
-	echo
-	FIND="Sardi-Arc"
-	REPLACE="Surfn-Arc"
-	sed -i "s/$FIND/$REPLACE/g" $HOME/.config/gtk-3.0/settings.ini
-	sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/gtk-3.0/settings.ini
-
-	if [ -f /usr/share/xsessions/xfce.desktop ]; then
-		echo
-		tput setaf 2
-		echo "################################################################"
-		echo "################### We are on Xfce4"
-		echo "################################################################"
-		tput sgr0
-		echo
-		
-		echo
-		echo "Changing the icons and theme"
-		echo
-
-		FIND="Arc-Dark"
-		REPLACE="Arc-Dawn-Dark"
-		sed -i "s/$FIND/$REPLACE/g" ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-		sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-
-		FIND="Sardi-Arc"
-		REPLACE="Surfn-Arc"
-		sed -i "s/$FIND/$REPLACE/g" ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-		sudo sed -i "s/$FIND/$REPLACE/g" /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-
-	fi
 
 	echo
 	echo "ArchLinux Logout - handy icons"
@@ -91,3 +70,10 @@ if grep -q "ArcoLinux" /etc/os-release; then
 
 fi
 
+echo
+tput setaf 6
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
+tput sgr0
+echo

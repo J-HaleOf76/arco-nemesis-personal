@@ -31,6 +31,18 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 echo
 tput setaf 2
 echo "################################################################"
@@ -38,41 +50,6 @@ echo "################### Display manager"
 echo "################################################################"
 tput sgr0
 echo
-
-# we are on ALCI
-
-if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
-
-	echo
-	tput setaf 2
-	echo "################################################################"
-	echo "################### We are on ALCI"
-	echo "################################################################"
-	tput sgr0
-	echo
-
-	echo
-	echo "Changing sddm theme"
-	if [ -f /usr/lib/sddm/sddm.conf.d/default.conf ]; then
-		sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf
-		echo
-		echo "Changing sddm theme"
-		echo
-		sudo pacman -S --noconfirm --needed arcolinux-sddm-simplicity-git
-		FIND="Current="
-		REPLACE="Current=arcolinux-simplicity"
-		sudo sed -i "s/$FIND/$REPLACE/g" /etc/sddm.conf
-	fi
-
-	echo
-	tput setaf 6
-	echo "################################################################"
-	echo "################### Done"
-	echo "################################################################"
-	tput sgr0
-	echo
-
-fi
 
 # we are on Arch Linux
 
@@ -88,8 +65,6 @@ if grep -q "archlinux" /etc/os-release; then
 
 	echo
 	echo "Installing and changing sddm theme"
-	echo "Archinstall is by default lightdm"
-	echo "Any time tosddm"
 	echo
 	echo "Copying sddm files"
 	sudo pacman -S --noconfirm --needed sddm arcolinux-sddm-simplicity-git
@@ -97,9 +72,6 @@ if grep -q "archlinux" /etc/os-release; then
 
 	[ -d /etc/sddm.conf.d ] || sudo mkdir /etc/sddm.conf.d
 	sudo cp -f /usr/share/archlinux-tweak-tool/data/arco/sddm.conf.d/kde_settings.conf /etc/sddm.conf.d/kde_settings.conf
-	FIND="Current=breeze"
-	REPLACE="Current=arcolinux-simplicity"
-	sudo sed -i "s/$FIND/$REPLACE/g" /etc/sddm.conf
 
 	if [ -f /etc/lightdm/lightdm.conf ]; then
 
@@ -135,6 +107,41 @@ if grep -q "archlinux" /etc/os-release; then
 		REPLACE="background=\/etc\/lightdm\/lightdm.jpg"
 		sudo sed -i "s/$FIND/$REPLACE/g" /etc/lightdm/lightdm-gtk-greeter.conf
 
+	fi
+
+	echo
+	tput setaf 6
+	echo "################################################################"
+	echo "################### Done"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+fi
+
+# we are on ALCI
+
+if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
+
+	echo
+	tput setaf 2
+	echo "################################################################"
+	echo "################### We are on ALCI"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+	echo
+	echo "Changing sddm theme"
+	if [ -f /usr/lib/sddm/sddm.conf.d/default.conf ]; then
+		sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf
+		echo
+		echo "Changing sddm theme"
+		echo
+		sudo pacman -S --noconfirm --needed arcolinux-sddm-simplicity-git
+		FIND="Current="
+		REPLACE="Current=arcolinux-simplicity"
+		sudo sed -i "s/$FIND/$REPLACE/g" /etc/sddm.conf
 	fi
 
 	echo
@@ -362,10 +369,18 @@ if [ -f /usr/local/bin/get-nemesis-on-sierra ]; then
 
 	echo
 	tput setaf 6
-	echo "################################################################"
-	echo "################### Done"
-	echo "################################################################"
+	echo "######################################################"
+	echo "###################  $(basename $0) done"
+	echo "######################################################"
 	tput sgr0
 	echo
 
 fi
+
+echo
+tput setaf 6
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
+tput sgr0
+echo

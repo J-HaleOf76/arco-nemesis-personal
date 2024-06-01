@@ -43,30 +43,61 @@ fi
 
 ##################################################################################################################
 
-echo
-tput setaf 3
-echo "Installing personal settings of variety - second time"
-echo
-[ -d $HOME"/.config/variety" ] || mkdir -p $HOME"/.config/variety"
-cp $installed_dir/settings/variety/variety.conf ~/.config/variety/
-[ -d /etc/skel/.config/variety ] || sudo mkdir -p /etc/skel/.config/variety
-sudo cp $installed_dir/settings/variety/variety.conf /etc/skel/.config/variety/
-tput sgr0
-echo
+# when on MANJARO
 
-echo
-tput setaf 3
-echo "################################################################"
-echo "FINAL SKEL"
-echo "Copying all files and folders from /etc/skel to ~"
-echo "First we make a backup of .config"
-echo "Wait for it ...."
-echo "################################################################"
-tput sgr0
-echo
+###############################################################################
+#
+#   DECLARATION OF FUNCTIONS
+#
+###############################################################################
 
-cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S)
-cp -arf /etc/skel/. ~
+installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
+
+###############################################################################
+
+# when on Manjaro
+
+if grep -q "Manjaro" /etc/os-release; then
+
+	echo
+	tput setaf 2
+	echo "################################################################"
+	echo "############### We are on an Manjaro iso"
+	echo "################################################################"
+	echo
+	tput sgr0
+
+	sudo pacman -R --noconfirm sardi-icons
+	sudo pacman -R --noconfirm qt5ct
+	sudo pacman -R --noconfirm qt6ct
+  	sudo pacman -R --noconfirm surfn-icons-git
+  	sudo pacman -S --noconfirm --needed surfn-plasma-dark-icons-git 
+  	sudo pacman -S --noconfirm --needed arcolinux-meta-plasma-design
+  	sudo rm -f /etc/skel/.config/variety/variety.conf
+  	sudo pacman -S --noconfirm --needed arcolinux-variety-git
+  	sudo wget https://raw.githubusercontent.com/erikdubois/arcolinux-nemesis/master/Personal/settings/variety/variety.conf -O ~/.config/variety/variety.conf
+
+	if [ -f /etc/environment ]; then
+		echo "EDITOR=nano" | sudo tee -a /etc/environment
+		echo "BROWSER=firefox" | sudo tee -a /etc/environment
+	fi
+
+	echo
+	tput setaf 6
+	echo "################################################################"
+	echo "################### Done"
+	echo "################################################################"
+	tput sgr0
+	echo
+
+	if ! grep -q "wobblywindowsEnabled=true" $HOME/.config/kwinrc; then
+echo '
+
+[Plugins]
+wobblywindowsEnabled=true' | sudo tee -a ~/.config/kwinrc
+  	fi
+
+fi
 
 echo
 tput setaf 6

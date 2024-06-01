@@ -31,6 +31,26 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
+echo
+tput setaf 3
+echo "################################################################"
+echo "################### Intervention first"
+echo "################################################################"
+tput sgr0
+echo
+
 if grep -q "ArchBang" /etc/os-release; then
 
   echo
@@ -70,17 +90,12 @@ if grep -q "ArchBang" /etc/os-release; then
   REPLACE="COMPRESSION=\"zstd\""
   sudo sed -i "s/$FIND/$REPLACE/g" /etc/mkinitcpio.conf
 
-  #plenty of opportunity for this to run later
-  #sudo mkinitcpio -P
-  #sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-  echo
-  tput setaf 6
-  echo "################################################################"
-  echo "################### Done"
-  echo "################################################################"
-  tput sgr0
-  echo
-
 fi
 
+echo
+tput setaf 6
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
+tput sgr0
+echo

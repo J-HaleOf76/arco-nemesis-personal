@@ -31,6 +31,18 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 echo
 tput setaf 2
 echo "################################################################"
@@ -38,6 +50,8 @@ echo "################### ArcoLinux Software to install"
 echo "################################################################"
 tput sgr0
 echo
+
+sudo pacman -S --noconfirm --needed archlinux-kernel-manager-dev
 
 if grep -q arcolinux_repo /etc/pacman.conf; then
 
@@ -62,6 +76,7 @@ fi
 
 sudo pacman -S --noconfirm --needed a-candy-beauty-icon-theme-git
 sudo pacman -S --noconfirm --needed arcolinux-app-glade-git
+sudo pacman -S --noconfirm --needed arcolinux-fastfetch-git
 sudo pacman -S --noconfirm --needed arcolinux-hblock-git
 sudo pacman -S --noconfirm --needed archlinux-tweak-tool-git
 sudo pacman -S --noconfirm --needed arcolinux-wallpapers-git
@@ -144,8 +159,8 @@ fi
 
 echo
 tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
 tput sgr0
 echo

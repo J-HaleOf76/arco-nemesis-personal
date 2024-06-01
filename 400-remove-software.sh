@@ -27,6 +27,18 @@
 #tput setaf 8 = light blue
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 echo
 tput setaf 3
 echo "######################################################"
@@ -35,8 +47,13 @@ echo "######################################################"
 tput sgr0
 echo
 
-sudo pacman -Rs --noconfirm vim vim-runtime
-sudo pacman -R --noconfirm archinstall
+sudo pacman -Rs --noconfirm nomacs
+sudo pacman -Rs --noconfirm hardinfo-gtk3
+sudo pacman -Rs --noconfirm paru-bin
+sudo pacman -Rs --noconfirm yay-bin
+sudo pacman -Rs broadcom-wl-dkms --noconfirm
+sudo pacman -Rs rtl8821cu-morrownr-dkms-git --noconfirm
+sudo pacman -Rs --noconfirm archinstall
 sudo pacman -Rs pragha --noconfirm
 sudo pacman -Rs lftp --noconfirm
 sudo pacman -Rs xf86-video-amdgpu --noconfirm
@@ -48,14 +65,14 @@ fi
 sudo pacman -Rs xf86-video-ati --noconfirm
 sudo pacman -Rs xf86-video-nouveau --noconfirm
 sudo pacman -Rs xf86-video-vesa --noconfirm
-sudo pacman -R --noconfirm xfce4-artwork
+sudo pacman -Rs --noconfirm xfce4-artwork
 sudo rm -rf /usr/share/backgrounds/xfce
-sudo pacman -Rs broadcom-wl-dkms --noconfirm
-sudo pacman -Rs rtl8821cu-morrownr-dkms-git --noconfirm
 
-sudo pacman -R --noconfirm adobe-source-han-sans-cn-fonts
-sudo pacman -R --noconfirm adobe-source-han-sans-jp-fonts
-sudo pacman -R --noconfirm adobe-source-han-sans-kr-fonts
+sudo pacman -Rs --noconfirm adobe-source-han-sans-cn-fonts
+sudo pacman -Rs --noconfirm adobe-source-han-sans-jp-fonts
+sudo pacman -Rs --noconfirm adobe-source-han-sans-kr-fonts
+sudo pacman -Rs --noconfirm vim vim-runtime
+sudo pacman -Rs --noconfirm simplescreenrecorder
 
 # always put the current .bashrc .zshrc away
 if [ -f /etc/skel/.bashrc ]; then
@@ -101,9 +118,7 @@ if [ -f /usr/local/bin/get-nemesis-on-carli ]; then
   tput sgr0
   echo
 
-  sudo pacman -R --noconfirm carli-xfce-config
   sudo pacman -R --noconfirm grml-zsh-config
-  sudo pacman -R --noconfirm systemd-resolvconf
 
   echo
   tput setaf 2
@@ -209,8 +224,9 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
   echo "######################################################"
   tput sgr0
   echo
-
-  sudo rm /etc/skel/.Xresources
+  if [ -f /etc/skel/.Xresources ]; then
+    sudo rm /etc/skel/.Xresources
+  fi
   sudo pacman -R --noconfirm amd-ucode
   sudo pacman -R --noconfirm b43-fwcutter
   sudo pacman -R --noconfirm broadcom-wl
@@ -466,7 +482,7 @@ fi
 echo
 tput setaf 6
 echo "######################################################"
-echo "################### Done"
+echo "###################  $(basename $0) done"
 echo "######################################################"
 tput sgr0
 echo

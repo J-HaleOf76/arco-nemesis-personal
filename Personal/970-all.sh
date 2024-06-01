@@ -31,6 +31,18 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 echo
 tput setaf 3
 echo "################################################################"
@@ -44,7 +56,6 @@ echo "Adding xorg xkill"
 echo
 [ -d /etc/X11/xorg.conf.d/ ] || mkdir -p /etc/X11/xorg.conf.d/
 sudo cp  settings/xorg/* /etc/X11/xorg.conf.d/
-echo
 
 echo
 echo "copying cursor file"
@@ -58,7 +69,6 @@ echo
 echo
 echo "Enable fstrim timer"
 sudo systemctl enable fstrim.timer
-echo
 
 echo
 echo "Testing if qemu agent is still active"
@@ -77,6 +87,7 @@ fi
 
 echo
 echo "Adding nanorc settings"
+echo
 
 if [ -f /etc/nanorc ]; then
 	sudo cp $installed_dir/settings/nano/nanorc /etc/nanorc
@@ -93,8 +104,8 @@ echo
 
 echo
 tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
 tput sgr0
 echo

@@ -31,31 +31,33 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
 sudo pacman -Syyu --noconfirm
-
-echo
-tput setaf 3
-echo "################################################################"
-echo "################### Get my personal variety settings"
-echo "################################################################"
-tput sgr0
-echo
-
-sudo wget https://raw.githubusercontent.com/erikdubois/arcolinux-nemesis/master/Personal/settings/variety/variety.conf -O ~/.config/variety/variety.conf
-
-echo
-tput setaf 3
-echo "################################################################"
-echo "################### No neofetch by default"
-echo "################################################################"
-tput sgr0
-echo
-
-sed -i 's/^neofetch/#neofetch/' ~/.bashrc
 
 # when on Plasma
 
 if [ -f /usr/share/wayland-sessions/plasma.desktop ]; then
+
+  echo
+  tput setaf 3
+  echo "################################################################"
+  echo "################### Get my personal variety settings"
+  echo "################################################################"
+  tput sgr0
+  echo
+
+  sudo wget https://raw.githubusercontent.com/erikdubois/arcolinux-nemesis/master/Personal/settings/variety/variety.conf -O ~/.config/variety/variety.conf
 
   echo
   tput setaf 2
@@ -126,11 +128,10 @@ wobblywindowsEnabled=true' | sudo tee -a ~/.config/kwinrc
 
 fi
 
-
 echo
 tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
 tput sgr0
 echo

@@ -31,15 +31,31 @@ installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 
 ##################################################################################################################
 
-echo "Deleting current /etc/pacman.d/mirrorlist and replacing with"
-echo
-echo "Server = https://mirror.osbeck.com/archlinux/\$repo/os/\$arch
+if [ "$DEBUG" = true ]; then
+    echo
+    echo "------------------------------------------------------------"
+    echo "Running $(basename $0)"
+    echo "------------------------------------------------------------"
+    echo
+    read -n 1 -s -r -p "Debug mode is on. Press any key to continue..."
+    echo
+fi
+
+##################################################################################################################
+
+if ! grep -q "Manjaro" /etc/os-release; then
+
+  echo "Deleting current /etc/pacman.d/mirrorlist and replacing with"
+  echo
+  echo "Server = https://mirror.osbeck.com/archlinux/\$repo/os/\$arch
 Server = http://mirror.osbeck.com/archlinux/\$repo/os/\$arch
 Server = https://geo.mirror.pkgbuild.com/\$repo/os/\$arch
 Server = http://mirror.rackspace.com/archlinux/\$repo/os/\$arch
 Server = https://mirror.rackspace.com/archlinux/\$repo/os/\$arch
 Server = https://mirrors.kernel.org/archlinux/\$repo/os/\$arch" | sudo tee /etc/pacman.d/mirrorlist
-echo
+  echo
+fi
+
 tput setaf 2
 echo "########################################################################"
 echo "Arch Linux Servers have been written to /etc/pacman.d/mirrorlist"
@@ -104,6 +120,7 @@ if [ ! -f /usr/bin/duf ]; then
 fi
 sudo pacman -S --noconfirm --needed expac
 sudo pacman -S --noconfirm --needed feh
+sudo pacman -S --noconfirm --needed fastfetch
 sudo pacman -S --noconfirm --needed file-roller
 sudo pacman -S --noconfirm --needed firefox
 sudo pacman -S --noconfirm --needed flameshot-git
@@ -121,8 +138,6 @@ sudo pacman -S --noconfirm --needed hddtemp
 sudo pacman -S --noconfirm --needed hw-probe
 sudo pacman -S --noconfirm --needed inkscape
 sudo pacman -S --noconfirm --needed insync
-#sudo pacman -S --noconfirm --needed kvantum-qt5-git
-#sudo pacman -S --noconfirm --needed kvantum-qt6-git
 sudo pacman -S --noconfirm --needed linux-firmware-qlogic
 sudo pacman -S --noconfirm --needed lastpass
 sudo pacman -S --noconfirm --needed logrotate
@@ -140,6 +155,8 @@ sudo pacman -S --noconfirm --needed noto-fonts
 sudo pacman -S --noconfirm --needed ntp
 sudo pacman -S --noconfirm --needed nss-mdns
 sudo pacman -S --noconfirm --needed oh-my-zsh-git
+#sudo pacman -S --noconfirm --needed pacman-log-orphans-hook
+sudo pacman -S --noconfirm --needed pacmanlogviewer
 sudo pacman -S --noconfirm --needed paru-git
 sudo pacman -S --noconfirm --needed polkit-gnome
 sudo pacman -S --noconfirm --needed python-pylint
@@ -150,7 +167,7 @@ sudo pacman -S --noconfirm --needed rate-mirrors-bin
 sudo pacman -S --noconfirm --needed ripgrep
 sudo pacman -S --noconfirm --needed rsync
 sudo pacman -S --noconfirm --needed scrot
-sudo pacman -S --noconfirm --needed simplescreenrecorder
+sudo pacman -S --noconfirm --needed simplescreenrecorder-git
 sudo pacman -S --noconfirm --needed sparklines-git
 sudo pacman -S --noconfirm --needed speedtest-cli-git
 sudo pacman -S --noconfirm --needed spotify
@@ -223,8 +240,8 @@ fi
 
 echo
 tput setaf 6
-echo "################################################################"
-echo "################### Done"
-echo "################################################################"
+echo "######################################################"
+echo "###################  $(basename $0) done"
+echo "######################################################"
 tput sgr0
 echo
