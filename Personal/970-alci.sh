@@ -54,10 +54,34 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
 	echo
 
 	echo
-	echo "Installing Edu packages"
-	sudo pacman -S --noconfirm --needed edu-skel-git
-  	sudo pacman -S --noconfirm --needed edu-xfce-git
-  	sudo pacman -S --noconfirm --needed edu-system-git
+	echo "To /usr/bin/fish we go"
+	echo
+
+	sudo pacman -S --noconfirm --needed fish
+	sudo pacman -S --noconfirm --needed arcolinux-fish-git
+	
+	# Going for fish as the default shell
+	FIND="\/bin\/bash"
+	REPLACE="\/usr\/bin\/fish"
+	sudo sed -i "s/$FIND/$REPLACE/g" /etc/passwd
+	echo
+
+	if [ -f /etc/skel/.config/variety/variety.conf ]; then
+		sudo rm -f /etc/skel/.config/variety/variety.conf
+	fi
+	sudo pacman -S --noconfirm --needed arconet-variety-config
+	sudo pacman -S --noconfirm --needed arcolinux-alacritty-git
+	sudo pacman -S --noconfirm --needed arcolinux-root-git
+	sudo pacman -S --noconfirm --needed arcolinux-fish-git
+	sudo pacman -S --noconfirm --needed arcolinux-btop-git
+	sudo pacman -S --noconfirm --needed kvantum-qt5
+	sudo pacman -S --noconfirm --needed arcolinux-kvantum-git
+	sudo pacman -S --noconfirm --needed pavucontrol
+
+	# setting my personal configuration for variety
+	echo "getting latest variety config from github"
+	sudo wget https://raw.githubusercontent.com/erikdubois/arcolinux-nemesis/master/Personal/settings/variety/variety.conf -O ~/.config/variety/variety.conf
+	sudo wget https://raw.githubusercontent.com/erikdubois/arcolinux-nemesis/master/Personal/settings/variety/variety.conf -O /etc/skel/.config/variety/variety.conf
 
   	echo
   	echo "Installing grub theme"
@@ -72,10 +96,7 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
 
 	echo
 	echo "Adding environment variables"
-	if [ -f /etc/environment ]; then
-		echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee /etc/environment
-		echo "EDITOR=nano" | sudo tee -a /etc/environment
-	fi
+	sudo cp $installed_dir/settings/environment/environment /etc/environment
 
 	echo
 	echo "Adding nanorc"
@@ -100,6 +121,9 @@ if [ -f /usr/local/bin/get-nemesis-on-alci ]; then
 		echo "Changing the whiskermenu"
 		echo
 		cp $installed_dir/settings/alci/whiskermenu-7.rc ~/.config/xfce4/panel/whiskermenu-7.rc
+		if [ ! -d /etc/skel/.config/xfce4/panel/ ]; then
+			sudo mkdir /etc/skel/.config/xfce4/panel/
+		fi
 		sudo cp $installed_dir/settings/alci/whiskermenu-7.rc /etc/skel/.config/xfce4/panel/whiskermenu-7.rc
 
 		echo

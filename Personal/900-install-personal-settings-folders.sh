@@ -132,10 +132,13 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	echo "Installing all shell files"
 	echo
 	cp $installed_dir/settings/shell-personal/.bashrc-personal ~/.bashrc-personal
+	cp $installed_dir/settings/shell-personal/alias.fish ~/.config/fish/alias.fish
 	cp $installed_dir/settings/shell-personal/.zshrc ~/.zshrc
 	sudo cp -f $installed_dir/settings/shell-personal/.zshrc /etc/skel/.zshrc
 	cp $installed_dir/settings/shell-personal/.zshrc-personal ~/.zshrc-personal
 	cp $installed_dir/settings/fish/alias.fish ~/.config/fish/alias.fish
+	sudo cp -vf $installed_dir/settings/environment/environment /etc/environment
+
 	echo
 
 	echo "Installing screenkey for teaching"
@@ -201,6 +204,10 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	echo "Changing icons for flameshot"
 	sh $installed_dir/settings/flameshot/adapt-flameshot.sh
 	echo
+
+	echo
+	echo "copy scripts to .bin"
+	cp  $installed_dir/settings/bin/* $HOME/.bin/
 
 fi
 

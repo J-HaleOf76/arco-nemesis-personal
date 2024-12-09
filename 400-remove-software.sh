@@ -72,7 +72,14 @@ sudo pacman -Rs --noconfirm adobe-source-han-sans-cn-fonts
 sudo pacman -Rs --noconfirm adobe-source-han-sans-jp-fonts
 sudo pacman -Rs --noconfirm adobe-source-han-sans-kr-fonts
 sudo pacman -Rs --noconfirm vim vim-runtime
-sudo pacman -Rs --noconfirm simplescreenrecorder
+
+echo
+tput setaf 3
+echo "######################################################"
+echo "################### Remove configs for all"
+echo "######################################################"
+tput sgr0
+echo
 
 # always put the current .bashrc .zshrc away
 if [ -f /etc/skel/.bashrc ]; then
@@ -187,21 +194,14 @@ if grep -q "EndeavourOS" /etc/os-release; then
   echo "######################################################"
   tput sgr0
   echo
+  if [ -f /etc/skel/.config/rofi/config.rasi ]; then
+    sudo rm -v /etc/skel/.config/rofi/config.rasi
+  fi   
 
   sudo systemctl disable firewalld
   sudo pacman -R --noconfirm firewalld
 
-  sudo pacman -R --noconfirm arc-gtk-theme-eos
-  sudo pacman -Rdd --noconfirm eos-settings-xfce4
-  #sudo pacman -Rdd --noconfirm modemmanager modemmanager-qt
   sudo pacman -R --noconfirm yay
-
-  # sudo rm -r /etc/skel/.config/Kvantum
-  # sudo rm -r /etc/skel/.config/gtk-3.0
-  # sudo rm -r /etc/skel/.config/variety
-  # sudo rm -r /etc/skel/.config/Thunar
-  # sudo rm -r /etc/skel/.config/xfce4
-  sudo rm /etc/skel/.config/xfce4/panel/whiskermenu-7.rc
 
   echo
   tput setaf 2
@@ -443,7 +443,6 @@ if grep -q "BigLinux" /etc/os-release; then
   tput sgr0
   echo
 
-  sudo rm -r /etc/skel/.config/variety/variety.conf
   sudo pacman -R --noconfirm big-skel
 
   echo
@@ -466,7 +465,6 @@ if grep -q "RebornOS" /etc/os-release; then
   tput sgr0
   echo
 
-  sudo rm -r /etc/skel/.config/variety/variety.conf
   sudo pacman -Rs parole --noconfirm
 
   echo

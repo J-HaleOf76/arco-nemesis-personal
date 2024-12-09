@@ -73,21 +73,26 @@ func_install_chadwm() {
     echo
 
     list=(
+    a-candy-beauty-icon-theme-git
     alacritty
     archlinux-logout-git
     arcolinux-chadwm-git
     arcolinux-chadwm-pacman-hook-git
+    arcolinux-nlogout-git
     arcolinux-powermenu-git
     arcolinux-wallpapers-candy-git
     arcolinux-wallpapers-git
+    arconet-xfce
     autorandr
     dash
     dmenu
     eww
     feh
+    gcc
     gvfs
     lolcat
     lxappearance
+    make
     picom
     polkit-gnome
     rofi-lbonn-wayland
@@ -105,6 +110,7 @@ func_install_chadwm() {
     xfce4-settings
     xfce4-taskmanager
     xfce4-terminal
+    xorg-xsetroot
     )
 
     count=0

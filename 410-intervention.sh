@@ -43,15 +43,16 @@ fi
 
 ##################################################################################################################
 
-echo
-tput setaf 3
-echo "################################################################"
-echo "################### Intervention first"
-echo "################################################################"
-tput sgr0
-echo
 
 if grep -q "ArchBang" /etc/os-release; then
+
+  echo
+  tput setaf 3
+  echo "################################################################"
+  echo "################### Intervention first for ArchBang"
+  echo "################################################################"
+  tput sgr0
+  echo
 
   echo
   tput setaf 2
@@ -61,15 +62,17 @@ if grep -q "ArchBang" /etc/os-release; then
   tput sgr0
   echo
 
-  echo
-  tput setaf 2
-  echo "################################################################"
-  echo "################### Running fixkey"
-  echo "################################################################"
-  tput sgr0
-  echo
 
-  /usr/local/bin/fixkey
+  if [ -f /usr/local/bin/fixkey ]; then
+    echo
+    tput setaf 2
+    echo "################################################################"
+    echo "################### Running fixkey if it exists"
+    echo "################################################################"
+    tput sgr0
+    echo
+    /usr/local/bin/fixkey
+  fi
 
   echo "Making backups of important files to start openbox"
 
@@ -89,13 +92,15 @@ if grep -q "ArchBang" /etc/os-release; then
   FIND="COMPRESSION=\"xz\""
   REPLACE="COMPRESSION=\"zstd\""
   sudo sed -i "s/$FIND/$REPLACE/g" /etc/mkinitcpio.conf
+  sudo mkinitcpio -P
+
+  echo
+  tput setaf 6
+  echo "######################################################"
+  echo "###################  $(basename $0) done"
+  echo "######################################################"
+  tput sgr0
+  echo
 
 fi
 
-echo
-tput setaf 6
-echo "######################################################"
-echo "###################  $(basename $0) done"
-echo "######################################################"
-tput sgr0
-echo

@@ -51,35 +51,97 @@ echo "################################################################"
 tput sgr0
 echo
 
-sudo pacman -S --noconfirm --needed archlinux-kernel-manager-dev
+# Function to check if a package is installed
+is_installed() {
+    pacman -Q "$1" &> /dev/null
+    return $?
+}
 
-if grep -q arcolinux_repo /etc/pacman.conf; then
+# Function to remove a package
+remove_package() {
+    local package=$1
+    echo "Attempting to remove package: $package"
+    sudo pacman -R --noconfirm "$package"
+    if [ $? -eq 0 ]; then
+        echo "Package '$package' has been removed successfully."
+    else
+        echo "Failed to remove package '$package'."
+    fi
+}
 
-  echo
-  tput setaf 2
-  echo "################################################################"
-  echo "################ ArcoLinux repos are already in /etc/pacman.conf "
-  echo "################################################################"
-  tput sgr0
-  echo
-  else
-  echo
-  tput setaf 2
-  echo "################################################################"
-  echo "################### Getting the keys and mirrors for ArcoLinux"
-  echo "################################################################"
-  tput sgr0
-  echo
-  sh arch/get-the-keys-and-repos.sh
-  sudo pacman -Sy
+echo
+tput setaf 2
+echo "################################################################"
+echo "################### Getting dev versions"
+echo "################################################################"
+tput sgr0
+echo
+
+PACKAGE="archlinux-kernel-manager"
+
+# Main logic
+if is_installed "$PACKAGE"; then
+    echo "Package '$PACKAGE' is installed."
+    remove_package "$PACKAGE"
+else
+    echo "Package '$PACKAGE' is not installed. No action taken."
 fi
 
+PACKAGE="archlinux-tweak-tool-git"
+
+# Main logic
+if is_installed "$PACKAGE"; then
+    echo "Package '$PACKAGE' is installed."
+    remove_package "$PACKAGE"
+else
+    echo "Package '$PACKAGE' is not installed. No action taken."
+fi
+
+PACKAGE="sofirem-git"
+
+# Main logic
+if is_installed "$PACKAGE"; then
+    echo "Package '$PACKAGE' is installed."
+    remove_package "$PACKAGE"
+else
+    echo "Package '$PACKAGE' is not installed. No action taken."
+fi
+
+PACKAGE="arcolinux-app-glade-git"
+
+# Main logic
+if is_installed "$PACKAGE"; then
+    echo "Package '$PACKAGE' is installed."
+    remove_package "$PACKAGE"
+else
+    echo "Package '$PACKAGE' is not installed. No action taken."
+fi
+
+sudo pacman -S --noconfirm --needed archlinux-kernel-manager-dev
+sudo pacman -S --noconfirm --needed archlinux-tweak-tool-dev-git
+sudo pacman -S --noconfirm --needed sofirem-dev-git
+sudo pacman -S --noconfirm --needed arcolinux-app-glade-dev-git
+
 sudo pacman -S --noconfirm --needed a-candy-beauty-icon-theme-git
-sudo pacman -S --noconfirm --needed arcolinux-app-glade-git
 sudo pacman -S --noconfirm --needed arcolinux-fastfetch-git
 sudo pacman -S --noconfirm --needed arcolinux-hblock-git
-sudo pacman -S --noconfirm --needed archlinux-tweak-tool-git
 sudo pacman -S --noconfirm --needed arcolinux-wallpapers-git
+
+if [ -d "/etc/skel/.config/variety/" ]; then
+    echo "Directory exists. Removing..."
+    sudo rm -r /etc/skel/.config/variety/
+    echo "Directory removed."
+else
+    echo "Directory does not exist."
+fi
+
+sudo pacman -S --noconfirm arconet-variety-config
+mkdir -p ~/.config/variety
+cp -rv /etc/skel/.config/variety ~/.config/
+
+# setting my personal configuration for variety
+echo "getting latest variety config from github"
+sudo wget https://raw.githubusercontent.com/erikdubois/arcolinux-nemesis/master/Personal/settings/variety/variety.conf -O ~/.config/variety/variety.conf
 
 if [ ! -f /usr/share/wayland-sessions/plasma.desktop ]; then
   sudo pacman -S --noconfirm --needed archlinux-logout-git

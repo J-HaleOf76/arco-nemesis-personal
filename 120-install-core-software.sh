@@ -43,7 +43,7 @@ fi
 
 ##################################################################################################################
 
-if ! grep -q "Manjaro" /etc/os-release; then
+if ! grep -q -e "Manjaro" -e "Artix" /etc/os-release; then
 
   echo "Deleting current /etc/pacman.d/mirrorlist and replacing with"
   echo
@@ -103,6 +103,7 @@ fi
 sudo pacman -S --noconfirm --needed adobe-source-sans-fonts
 sudo pacman -S --noconfirm --needed aic94xx-firmware
 sudo pacman -S --noconfirm --needed archiso
+sudo pacman -S --noconfirm --needed archlinux-tools
 sudo pacman -S --noconfirm --needed avahi
 sudo pacman -S --noconfirm --needed baobab
 sudo pacman -S --noconfirm --needed bash-completion
@@ -113,6 +114,7 @@ sudo pacman -S --noconfirm --needed chromium
 sudo pacman -S --noconfirm --needed cpuid
 sudo pacman -S --noconfirm --needed curl
 sudo pacman -S --noconfirm --needed dconf-editor
+sudo pacman -S --noconfirm --needed devtools
 sudo pacman -S --noconfirm --needed discord
 sudo pacman -S --noconfirm --needed downgrade
 if [ ! -f /usr/bin/duf ]; then
@@ -120,18 +122,22 @@ if [ ! -f /usr/bin/duf ]; then
 fi
 sudo pacman -S --noconfirm --needed expac
 sudo pacman -S --noconfirm --needed feh
-sudo pacman -S --noconfirm --needed fastfetch
+sudo pacman -S --noconfirm --needed fastfetch-git
 sudo pacman -S --noconfirm --needed file-roller
 sudo pacman -S --noconfirm --needed firefox
 sudo pacman -S --noconfirm --needed flameshot-git
 sudo pacman -S --noconfirm --needed font-manager
 sudo pacman -S --noconfirm --needed gimp
 sudo pacman -S --noconfirm --needed git
-sudo pacman -S --noconfirm --needed gitahead-bin
+sudo pacman -S --noconfirm --needed gitahead-git
 sudo pacman -S --noconfirm --needed gitfiend
+sudo pacman -S --noconfirm --needed gittyup-git
 sudo pacman -S --noconfirm --needed gnome-disk-utility
 sudo pacman -S --noconfirm --needed gparted
+sudo pacman -S --noconfirm --needed gpu-screen-recorder-git
+sudo pacman -S --noconfirm --needed gpu-screen-recorder-gtk-git
 sudo pacman -S --noconfirm --needed gvfs-smb
+sudo pacman -S --noconfirm --needed gvfs-dnssd
 sudo pacman -S --noconfirm --needed hardcode-fixer-git
 sudo pacman -S --noconfirm --needed hardinfo2
 sudo pacman -S --noconfirm --needed hddtemp
@@ -150,6 +156,7 @@ sudo pacman -S --noconfirm --needed mlocate
 sudo pacman -S --noconfirm --needed meld
 sudo pacman -S --noconfirm --needed mintstick-git
 sudo pacman -S --noconfirm --needed most
+sudo pacman -S --noconfirm --needed namcap
 sudo pacman -S --noconfirm --needed neofetch
 sudo pacman -S --noconfirm --needed noto-fonts
 sudo pacman -S --noconfirm --needed ntp
@@ -167,9 +174,9 @@ sudo pacman -S --noconfirm --needed rate-mirrors-bin
 sudo pacman -S --noconfirm --needed ripgrep
 sudo pacman -S --noconfirm --needed rsync
 sudo pacman -S --noconfirm --needed scrot
-sudo pacman -S --noconfirm --needed simplescreenrecorder-git
+sudo pacman -S --noconfirm --needed simplescreenrecorder
 sudo pacman -S --noconfirm --needed sparklines-git
-sudo pacman -S --noconfirm --needed speedtest-cli-git
+sudo pacman -S --noconfirm --needed speedtest-cli
 sudo pacman -S --noconfirm --needed spotify
 sudo pacman -S --noconfirm --needed squashfs-tools
 sudo pacman -S --noconfirm --needed sublime-text-4
