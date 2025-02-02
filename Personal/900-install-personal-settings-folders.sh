@@ -154,6 +154,11 @@ if grep -q "ArcoLinux" /etc/os-release; then
 	sudo cp -arf $installed_dir/settings/obs-studio/* ~/.config/obs-studio/
 	echo
 	
+	echo "Personal emptty conf"
+	[ -d /etc/emptty ] || sudo mkdir -p /etc/emptty
+	sudo cp -arf $installed_dir/settings/emptty/conf /etc/emptty/conf
+	sudo usermod -aG nopasswdlogin erik
+
 	echo "To personal Kvantum setup"
 	echo
 	[ -d $HOME"/.config/Kvantum" ] || mkdir -p $HOME"/.config/Kvantum"
