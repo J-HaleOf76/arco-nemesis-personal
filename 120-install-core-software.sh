@@ -76,7 +76,7 @@ echo "################################################################"
 tput sgr0
 echo
 
-# Software we do not want on our Plasma system
+# All the software below will be installed on all desktops except on Plasma
 if [ ! -f /usr/share/wayland-sessions/plasma.desktop ]; then
   sudo pacman -S --noconfirm --needed alacritty
   sudo pacman -S --noconfirm --needed alacritty-themes
@@ -87,11 +87,9 @@ if [ ! -f /usr/share/wayland-sessions/plasma.desktop ]; then
   sudo pacman -S --noconfirm --needed dmenu
   sudo pacman -S --noconfirm --needed evince
   sudo pacman -S --noconfirm --needed galculator
-  sudo pacman -S --noconfirm --needed lolcat
   sudo pacman -S --noconfirm --needed network-manager-applet
   sudo pacman -S --noconfirm --needed networkmanager-openvpn
   sudo pacman -S --noconfirm --needed nitrogen
-  sudo pacman -S --noconfirm --needed nomacs-qt6-git
   sudo pacman -S --noconfirm --needed numlockx
   sudo pacman -S --noconfirm --needed pamac-aur
   sudo pacman -S --noconfirm --needed pavucontrol
@@ -102,6 +100,7 @@ if [ ! -f /usr/share/wayland-sessions/plasma.desktop ]; then
   sudo pacman -S --noconfirm --needed xorg-xkill
 fi
 
+# All the software below will be installed on all desktops
 sudo pacman -S --noconfirm --needed adobe-source-sans-fonts
 sudo pacman -S --noconfirm --needed aic94xx-firmware
 sudo pacman -S --noconfirm --needed archiso
@@ -149,6 +148,7 @@ sudo pacman -S --noconfirm --needed insync
 sudo pacman -S --noconfirm --needed linux-firmware-qlogic
 sudo pacman -S --noconfirm --needed lastpass
 sudo pacman -S --noconfirm --needed logrotate
+sudo pacman -S --noconfirm --needed lolcat
 sudo pacman -S --noconfirm --needed lollypop
 sudo pacman -S --noconfirm --needed lshw
 sudo pacman -S --noconfirm --needed man-db
@@ -161,6 +161,7 @@ sudo pacman -S --noconfirm --needed mintstick-git
 sudo pacman -S --noconfirm --needed most
 sudo pacman -S --noconfirm --needed namcap
 sudo pacman -S --noconfirm --needed neofetch
+sudo pacman -S --noconfirm --needed nomacs-qt6-git
 sudo pacman -S --noconfirm --needed noto-fonts
 sudo pacman -S --noconfirm --needed ntp
 sudo pacman -S --noconfirm --needed nss-mdns
