@@ -55,7 +55,7 @@ echo
 echo "Adding xorg xkill"
 echo
 [ -d /etc/X11/xorg.conf.d/ ] || mkdir -p /etc/X11/xorg.conf.d/
-sudo cp  settings/xorg/* /etc/X11/xorg.conf.d/
+sudo cp  $installed_dir/settings/xorg/* /etc/X11/xorg.conf.d/
 
 echo
 echo "copying cursor file"
@@ -100,6 +100,15 @@ if ! grep -q "hkp://keyserver.ubuntu.com:80" /etc/pacman.d/gnupg/gpg.conf; then
 echo '
 keyserver hkp://keyserver.ubuntu.com:80' | sudo tee --append /etc/pacman.d/gnupg/gpg.conf
 fi
+echo
+
+echo
+echo "################################################################"
+echo "Getting latest /etc/nsswitch.conf from ArcoLinux"
+echo "################################################################"
+echo
+sudo cp /etc/nsswitch.conf /etc/nsswitch.conf.bak
+sudo wget https://raw.githubusercontent.com/arconetpro/arconet-iso/refs/heads/main/archiso/airootfs/etc/nsswitch.conf -O $workdir/etc/nsswitch.conf
 echo
 
 echo
